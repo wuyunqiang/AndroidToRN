@@ -5,8 +5,13 @@ Android studio3.0<br>
 react native 0.50<br>
 Mac 10.12.6 <br>
 
+1.0.1<br>
+1:添加react navigation可以跳转页面<br>
+2:添加code push(暂时不可用)<br>
+3:优化添加预加载reactnative页面 (参考：https://github.com/songxiaoliang/ReactNativeApp)<br>
+
 运行效果：<br>
-![andoridtoRN.gif](http://upload-images.jianshu.io/upload_images/3353755-2ff609743a149806.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+![androidrnshow.gif](http://upload-images.jianshu.io/upload_images/3353755-19889b11ffdeb1c6.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 <br>
 代码仅供参考：
 如要运行，需要下载node_modules。
