@@ -7,7 +7,7 @@ Mac 10.12.6 <br>
 
 1.0.1<br>
 1:添加react navigation可以跳转页面<br>
-2:添加code push(bug fixed)<br>
+2:添加code push(bug fixed) 有关codepush问题https://github.com/wuyunqiang/ReactNativeUtil/issues/26<br>
 3:优化添加预加载reactnative页面 (参考：https://github.com/songxiaoliang/ReactNativeApp)<br>
 
 
