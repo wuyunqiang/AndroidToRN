@@ -10,10 +10,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -40,8 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
         @Nullable
         @Override
         protected String getJSBundleFile() {
-//            return CodePush.getJSBundleFile();
-            return CodePush.getJSBundleFile("main.bundle");
+            return CodePush.getJSBundleFile();
+//            return CodePush.getJSBundleFile("main.bundle");
         }
 
         @Override
@@ -59,6 +56,12 @@ public class MainApplication extends Application implements ReactApplication {
                     getApplicationContext(), BuildConfig.DEBUG,"http://172.28.110.180:3000/"));
 
             return modules;
+        }
+
+
+        @Override
+        protected String getJSMainModuleName() {
+            return "index";
         }
     };
 

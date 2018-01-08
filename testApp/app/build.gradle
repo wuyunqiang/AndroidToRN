@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
+
+project.ext.react = [
+        entryFile: "index.js",
+        nodeExecutableAndArgs : ["/usr/local/bin/node"]//添加node路径
+]
+
+apply from: "../node_modules/react-native/react.gradle"
+apply from: "../node_modules/react-native-code-push/android/codepush.gradle"
+
 android {
     compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.example.wuyunqiang.testapp"
         minSdkVersion 19
@@ -9,17 +19,22 @@ android {
         versionName "1.0.1 "
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
 }
 
 dependencies {
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
-    compile "com.facebook.react:react-native:+" // From node_modules.
+    implementation "com.facebook.react:react-native:+" // From node_modules.
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
