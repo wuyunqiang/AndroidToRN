@@ -1,5 +1,6 @@
 # AndroidToRN
-原生android中嵌入React Native
+原生android中嵌入React Native<br>
+使用codepush热更新
 # 环境：
 Android studio3.0<br>
 react native 0.50<br>
