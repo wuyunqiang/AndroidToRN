@@ -6,6 +6,14 @@ Android studio3.0<br>
 react native 0.50<br>
 Mac 10.12.6 <br>
 
+# ChangeLog:<br>
+
+1.0.2<br>
+纯原生->一半rn一半原生->纯rn<br>
+效果：<br>
+![nativetiRN.gif](http://upload-images.jianshu.io/upload_images/3353755-2db0558b7af4f3d1.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
 1.0.1<br>
 1:添加react navigation可以跳转页面<br>
 2:添加code push(bug fixed) 有关codepush问题https://github.com/wuyunqiang/ReactNativeUtil/issues/26<br>
