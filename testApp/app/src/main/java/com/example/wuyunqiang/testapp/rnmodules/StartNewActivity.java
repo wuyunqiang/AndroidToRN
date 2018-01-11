@@ -2,9 +2,8 @@ package com.example.wuyunqiang.testapp.rnmodules;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
-import com.example.wuyunqiang.testapp.H5Activity;
+import com.example.wuyunqiang.testapp.TestActivity;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -33,7 +32,7 @@ public class StartNewActivity extends ReactContextBaseJavaModule {
         if(activity==null){
             return;
         }
-        Intent intent = new Intent(activity, H5Activity.class);
+        Intent intent = new Intent(activity, TestActivity.class);
         activity.startActivity(intent);
     }
 }

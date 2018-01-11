@@ -4,22 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/catalyst_redbox_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.wuyunqiang.testapp.MainActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="完全是原生界面"
+        android:text="Hello World 这里是原生视图!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/toTest"
+        android:id="@+id/roRN"
         android:onClick="onClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="toTest"/>
+        android:text="toAllRN"/>
 
 </LinearLayout>

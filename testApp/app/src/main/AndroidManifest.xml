@@ -24,7 +24,7 @@
         <activity
             android:name=".MyReactActivity"
             android:label="@string/app_name"/>
-        <activity android:name=".H5Activity"/>
+        <activity android:name=".TestActivity"/>
     </application>
 
 </manifest>

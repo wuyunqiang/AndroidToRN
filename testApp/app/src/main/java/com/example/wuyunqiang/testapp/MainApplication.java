@@ -52,9 +52,8 @@ public class MainApplication extends Application implements ReactApplication {
             List<ReactPackage> modules = new ArrayList<>();
             modules.add(new MainReactPackage());
             modules.add(new RNPackage());
-            modules.add( new CodePush("M9ezsCkj7OUhZcXONMg4accqVUu54ksvOXqog",
+            modules.add(new CodePush("M9ezsCkj7OUhZcXONMg4accqVUu54ksvOXqog",
                     getApplicationContext(), BuildConfig.DEBUG,"http://172.28.110.180:3000/"));
-
             return modules;
         }
 
@@ -84,5 +83,6 @@ public class MainApplication extends Application implements ReactApplication {
     public static MainApplication getInstance() {
         return instance;
     }
+
 
 }

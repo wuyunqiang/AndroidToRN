@@ -25,16 +25,18 @@ export default class App extends Component {
 
     constructor(props){
         super(props);
+        console.log("One执行构造函数");
     }
 
     componentDidMount() {
+        console.log("One componentDidMount ");
         DeviceEventEmitter.addListener('Native', (...data) =>{
             console.log('MyReactActivity',...data);
         });
     }
 
 
-    goToH5 = ()=>{
+    hotupdate = ()=>{
         console.log("CodePush",CodePush);
         let data =  CodePush.sync({
             updateDialog: {
@@ -58,8 +60,8 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-              <TouchableOpacity activeOpacity={1} onPress={this.goToH5}>
-                <Text style={styles.hello}>Hello, 这里是app.js哈哈哈哈!</Text>
+              <TouchableOpacity activeOpacity={1} onPress={this.hotupdate}>
+                <Text style={styles.hello}>测试codepush</Text>
               </TouchableOpacity>
               <TouchableOpacity activeOpacity={1} onPress={this.goToOther}>
                 <Text style={styles.hello}>页面跳转</Text>

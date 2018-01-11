@@ -13,11 +13,11 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.NotActiveException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +49,8 @@ public class CodePush implements ReactPackage {
 
     private static ReactInstanceHolder mReactInstanceHolder;
     private static CodePush mCurrentInstance;
+
+    private static ReactApplicationContext reactApplicationContext;
 
     public CodePush(String deploymentKey, Context context) {
         this(deploymentKey, context, false);
@@ -277,7 +279,7 @@ public class CodePush implements ReactPackage {
         return sIsRunningBinaryVersion;
     }
 
-    private boolean isPackageBundleLatest(JSONObject packageMetadata) {
+    public boolean isPackageBundleLatest(JSONObject packageMetadata) {
         try {
             Long binaryModifiedDateDuringPackageInstall = null;
             String binaryModifiedDateDuringPackageInstallString = packageMetadata.optString(CodePushConstants.BINARY_MODIFIED_TIME_KEY, null);
@@ -346,6 +348,7 @@ public class CodePush implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
+        CodePush.reactApplicationContext = reactApplicationContext;
         CodePushNativeModule codePushModule = new CodePushNativeModule(reactApplicationContext, this, mUpdateManager, mTelemetryManager, mSettingsManager);
         CodePushDialog dialogModule = new CodePushDialog(reactApplicationContext);
 
@@ -363,5 +366,73 @@ public class CodePush implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         return new ArrayList<>();
+    }
+
+    public static boolean issIsRunningBinaryVersion() {
+        return sIsRunningBinaryVersion;
+    }
+
+    public static boolean issNeedToReportRollback() {
+        return sNeedToReportRollback;
+    }
+
+    public static boolean issTestConfigurationFlag() {
+        return sTestConfigurationFlag;
+    }
+
+    public static String getsAppVersion() {
+        return sAppVersion;
+    }
+
+    public boolean ismDidUpdate() {
+        return mDidUpdate;
+    }
+
+    public String getmAssetsBundleFileName() {
+        return mAssetsBundleFileName;
+    }
+
+    public CodePushUpdateManager getmUpdateManager() {
+        return mUpdateManager;
+    }
+
+    public CodePushTelemetryManager getmTelemetryManager() {
+        return mTelemetryManager;
+    }
+
+    public SettingsManager getmSettingsManager() {
+        return mSettingsManager;
+    }
+
+    public String getmDeploymentKey() {
+        return mDeploymentKey;
+    }
+
+    public static String getmServerUrl() {
+        return mServerUrl;
+    }
+
+    public Context getmContext() {
+        return mContext;
+    }
+
+    public boolean ismIsDebugMode() {
+        return mIsDebugMode;
+    }
+
+    public static String getmPublicKey() {
+        return mPublicKey;
+    }
+
+    public static ReactInstanceHolder getmReactInstanceHolder() {
+        return mReactInstanceHolder;
+    }
+
+    public static CodePush getmCurrentInstance() {
+        return mCurrentInstance;
+    }
+
+    public static ReactApplicationContext getReactApplicationContext() {
+        return reactApplicationContext;
     }
 }

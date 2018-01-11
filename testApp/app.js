@@ -29,7 +29,6 @@ export default class App extends Component {
         });
     }
 
-
     goToH5 = ()=>{
         console.log("CodePush",CodePush);
         let data =  CodePush.sync({
@@ -48,12 +47,9 @@ export default class App extends Component {
     };
 
     goToOther = ()=>{
-
-
     };
 
     render() {
-
         return  (<AppNavigator/>)
     }
 }

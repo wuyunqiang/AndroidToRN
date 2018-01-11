@@ -19,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenLocal()
         maven {
             // All of React Native (JS, Android binaries) is installed from npm
             url "../node_modules/react-native/android"

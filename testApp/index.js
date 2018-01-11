@@ -13,36 +13,8 @@ import {
   View,
     DeviceEventEmitter
 } from 'react-native';
+import AppNavigator from './router'
+import App from './TestActivity'
+AppRegistry.registerComponent('RNActivity', () => AppNavigator);
 
-export default class App extends Component {
-    constructor(props){
-        super(props);
-    }
-
-    componentDidMount() {
-        DeviceEventEmitter.addListener('Native', (...data) =>{
-            console.log('MyReactActivity',...data);
-        });
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.hello}>Hello, My Hybrid App!</Text>
-            </View>
-        )
-    }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-    hello: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-});
-AppRegistry.registerComponent('testApp', () => App);
+AppRegistry.registerComponent('TestActivity', () => App);
