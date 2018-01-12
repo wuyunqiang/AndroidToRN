@@ -8,6 +8,12 @@ Mac 10.12.6 <br>
 
 # ChangeLog:<br>
 
+1.0.3<br>
+添加下拉刷新[react-native-pullview](https://github.com/wuyunqiang/react-native-pullview)<br>
+效果：<br>
+![pullview.gif](http://upload-images.jianshu.io/upload_images/3353755-2d90319bf4a5e3a8.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
 1.0.2<br>
 纯原生->一半rn一半原生->纯rn<br>
 效果：<br>
