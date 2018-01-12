@@ -23,12 +23,14 @@ export default class App extends Component {
 
     static navigationOptions = ({navigation})=> ({
         header:null,
-        tabBarLabel:'第二页',
+        tabBarLabel:'第三页',
         tabBarIcon: ({ tintColor,focused }) => (
-            <Image style={{width:Platform.OS==='ios'?38/2:38,height:Platform.OS==='ios'?40/2:40}}
-                   source={focused?AppImages.tab.project_active:AppImages.tab.project_unactive}/>
+            <Image style={{width:Platform.OS==='ios'?42/2:42/2,height:Platform.OS==='ios'?43/2:43/2}}
+                   source={focused?AppImages.tab.profile_active:AppImages.tab.profile_unactive}/>
         ),
+
     })
+
     constructor(props){
         super(props);
     }
@@ -38,9 +40,10 @@ export default class App extends Component {
 
 
 
+
     render() {
         return (
-            <View style={styles.container}><Text style={styles.hello}>第二页</Text></View>
+            <View style={styles.container}><Text style={styles.hello}>第三页</Text></View>
         )
     }
 }

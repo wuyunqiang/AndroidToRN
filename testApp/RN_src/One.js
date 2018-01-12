@@ -11,6 +11,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Image,
     TouchableOpacity,
     NativeModules,
     ImageBackground,
@@ -20,9 +21,16 @@ import PullView from './pull/PullView'
 import CodePush from 'react-native-code-push';
 export default class App extends Component {
 
-    static navigationOptions = {
-        header:null,
-    };
+    static navigationOptions = ({navigation})=> ({
+       header:null,
+       tabBarLabel:'第一页',
+        tabBarIcon: ({tintColor,focused}) => (
+            <Image
+                style={{width:Platform.OS==='ios'?45/2:45/2,height:Platform.OS==='ios'?41/2:41/2}}
+                source={focused?AppImages.tab.home_active:AppImages.tab.home_unactive}/>
+        ),
+
+})
 
     constructor(props){
         super(props);
