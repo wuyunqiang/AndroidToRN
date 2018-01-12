@@ -23,11 +23,12 @@ Mac 10.12.6 <br>
 6：andorid studio 运行项目即可<br>
 
 # ChangeLog:<br>
-
 1.0.3<br>
-添加下拉刷新[react-native-pullview](https://github.com/wuyunqiang/react-native-pullview)<br>
+1：添加下拉刷新[react-native-pullview](https://github.com/wuyunqiang/react-native-pullview)<br>
+2：添加自定义Tab<br>
 效果：<br>
 ![pullview.gif](http://upload-images.jianshu.io/upload_images/3353755-2d90319bf4a5e3a8.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![custometab.gif](http://upload-images.jianshu.io/upload_images/3353755-b52dce1ac265ae4b.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 1.0.2<br>
