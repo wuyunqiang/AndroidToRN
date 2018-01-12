@@ -13,8 +13,10 @@ import {
   View,
     DeviceEventEmitter
 } from 'react-native';
-import AppNavigator from './router'
-import App from './TestActivity'
+import './RN_src/utils'
+import './RN_src/assets'
+import AppNavigator from './RN_src/router'
+import App from './RN_src/TestActivity'
 AppRegistry.registerComponent('RNActivity', () => AppNavigator);
 
 AppRegistry.registerComponent('TestActivity', () => App);
