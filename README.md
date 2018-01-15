@@ -5,7 +5,7 @@
 Android studio3.0<br>
 react native 0.50<br>
 Mac 10.12.6 <br>
-如有问题请提issue
+如有问题或者需要我添加什么请提issue
 
 项目下载后<br>
 1: cd testApp<br>
