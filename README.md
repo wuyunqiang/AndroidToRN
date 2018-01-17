@@ -7,6 +7,7 @@ react native 0.50<br>
 Mac 10.12.6 <br>
 如有问题或者需要我添加什么请提issue
 
+
 项目下载后<br>
 1: cd testApp<br>
 2: yarn install<br>
@@ -23,6 +24,12 @@ Mac 10.12.6 <br>
 6：andorid studio 运行项目即可<br>
 
 # ChangeLog:<br>
+1.0.4<br>
+1:新增pullLayout->此组件是原生下拉刷新组件的封装（因为android下拉刷新组件一直存在性能问题所以自己封装了一个）<br>
+组件基于[SmartRefreshLayout](https://github.com/wuyunqiang/react-native-pullview)仅限Android使用<br>
+效果如下：<br>
+![nativepull.gif](http://upload-images.jianshu.io/upload_images/3353755-0fc729d83bd19655.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 1.0.3<br>
 1：添加下拉刷新[react-native-pullview](https://github.com/wuyunqiang/react-native-pullview)<br>
 2：添加自定义Tab<br>
