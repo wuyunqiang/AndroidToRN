@@ -22,7 +22,6 @@ import CodePush from 'react-native-code-push';
 export default class App extends Component {
 
     static navigationOptions = ({navigation})=> ({
-       header:null,
        tabBarLabel:'第一页',
         tabBarIcon: ({tintColor,focused}) => (
             <Image
@@ -66,6 +65,9 @@ export default class App extends Component {
       this.props.navigation.navigate('Two',{...params})
     };
 
+    goToNativePull = ()=>{
+        this.props.navigation.navigate('Three');
+    };
 
     onPullRelease= (resolve) => {
         setTimeout(()=>{
@@ -92,7 +94,9 @@ export default class App extends Component {
                 <View style={styles.Item}><Text style={styles.hello}>测试codepush</Text></View>
                 </TouchableOpacity>
 
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+            <TouchableOpacity activeOpacity={1} onPress={this.goToNativePull}>
+                <View style={styles.Item}><Text style={styles.hello}>测试原生封装的下拉刷新</Text></View>
+            </TouchableOpacity>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>

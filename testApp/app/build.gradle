@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 project.ext.react = [
-        entryFile: "index.js",
-        nodeExecutableAndArgs : ["/usr/local/bin/node"]//添加node路径
+        entryFile            : "index.js",
+        nodeExecutableAndArgs: ["/usr/local/bin/node"]//添加node路径
 ]
 
 apply from: "../node_modules/react-native/react.gradle"
@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
     implementation "com.facebook.react:react-native:+" // From node_modules.
     implementation fileTree(dir: 'libs', include: ['*.jar'])

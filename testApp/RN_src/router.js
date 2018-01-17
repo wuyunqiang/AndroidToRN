@@ -16,15 +16,18 @@ import {
     DeviceEventEmitter,
     Image,
 } from 'react-native';
-import { StackNavigator,TabNavigator } from 'react-navigation';
+import { StackNavigator,TabNavigator,NavigationActions } from 'react-navigation';
 import Tab from './component/Tab'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import One from './One'
 import Two from './Two'
 import Three from './Three'
+import Four from './Four'
 const Routes = {
     One:{screen: One},
     Two:{screen: Two},
+    Three:{screen: Three},
+    Four:{screen:Four},
 };
 
 
@@ -65,7 +68,7 @@ const ListIndex = TabNavigator(
     },
     {
         lazy: true,
-        swipeEnabled: false,
+        swipeEnabled: true,
         tabBarComponent:props => <Tab {...props}/>,
         tabBarPosition: 'bottom',
         animationEnabled: true,
@@ -86,6 +89,35 @@ const TransitionConfiguration = () => {
     };
 };
 
+const StackOptions = ({navigation}) => {
+    const gesturesEnabled = true;
+    const headerStyle= {
+        height:Platform.OS==='ios'?SCALE(110):SCALE(110)-20,
+        backgroundColor: Color.C5995f5,
+        borderWidth:0,
+        borderBottomWidth:0,
+    };
+    const headerTitleStyle = {
+        fontSize: FONT(17),
+        color: 'white',
+        alignSelf: 'center'
+    };
+    const headerTintColor= 'white';
+    const headerLeft = (
+        <TouchableOpacity activeOpacity={1} onPress={()=>{navigation.goBack(null)}}>
+            <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+                <Image
+                    source={AppImages.Home.back}
+                    style={{width:SCALE(20),height:SCALE(37)}}/>
+            </View>
+        </TouchableOpacity>
+    );
+    const headerRight=(<View style={{paddingRight:SCALE(30)}}>
+    </View>);
+    return {headerLeft,headerRight,headerStyle,gesturesEnabled,headerTitleStyle,headerTintColor,}
+};
+
+
 
 
 const AppNavigator = StackNavigator(
@@ -100,7 +132,41 @@ const AppNavigator = StackNavigator(
         headerMode: 'screen',
         mode: 'card',
         transitionConfig: TransitionConfiguration,
+        navigationOptions: ({navigation}) => StackOptions({navigation}),
     }
 );
 
-export default AppNavigator;
+// 主要是这一步
+const navigateOnce = (getStateForAction) => (action, state) => {
+    console.log('执行了这里跳转页面')
+    const {type, routeName} = action
+    return (
+        state &&
+        type === NavigationActions.NAVIGATE &&
+        routeName === state.routes[state.routes.length - 1].routeName
+    ) ? null : getStateForAction(action, state)
+}
+
+// 这是第二步
+AppNavigator.router.getStateForAction = navigateOnce(AppNavigator.router.getStateForAction)
+
+function getCurrentRouteName(navigationState) {
+    if (!navigationState) {
+        return null;
+    }
+    const route = navigationState.routes[navigationState.index];
+    // dive into nested navigators
+    if (route.routes) {
+        return getCurrentRouteName(route);
+    }
+    return route.routeName;
+}
+
+export default ()=><AppNavigator onNavigationStateChange={(prevState, currentState) => {
+    const currentScreen = getCurrentRouteName(currentState);
+    const prevScreen = getCurrentRouteName(prevState);
+    if(currentScreen==='Two'){//监听页面跳转 符合要求可以发送监听
+        console.log('页面跳转')
+        DeviceEventEmitter.emit('Two', 'Two');
+    }
+}}/>;

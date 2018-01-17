@@ -1,14 +1,14 @@
 package com.example.wuyunqiang.testapp;
 
 import com.example.wuyunqiang.testapp.rnmodules.StartNewActivity;
+import com.example.wuyunqiang.testapp.rnview.HeaderLayout;
+import com.example.wuyunqiang.testapp.rnview.PullLayout;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,8 +26,9 @@ public class RNPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        List<ViewManager> views = new ArrayList<>();
+        views.add(new HeaderLayout());
+        views.add(new PullLayout());
+        return views;
     }
-
-
 }

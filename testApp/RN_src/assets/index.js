@@ -19,12 +19,21 @@ const tab = {
     get profile_unactive() {return require('./tab/profile_unactive.png');},
 };
 
+const Home = {
+    get back() {return require('../assets/home/back.png')},
+};
+
+
 const AppImages = {
     get List(){
         return List;
     },
     get tab(){
         return tab;
+    },
+
+    get Home(){
+        return Home;
     },
 };
 export default AppImages;
