@@ -30,7 +30,9 @@ export default class Tab extends Component {
         };
 
         if(index==1){
-            return (<View style={[styles.tabItem,{backgroundColor:'transparent'}]}>
+            return (<View
+                    key={route.key}
+                    style={[styles.tabItem,{backgroundColor:'transparent'}]}>
                     </View>
             );
         }
@@ -59,24 +61,21 @@ export default class Tab extends Component {
             route:routes[1],
             tintColor:color
         };
-        return (
-        <View style={{width:WIDTH}}>
+        return (<View style={{width:WIDTH}}>
             <View style={styles.tab}>
                 {routes && routes.map((route,index) => this.renderItem(route, index))}
             </View>
             <TouchableOpacity
-            key={"centerView"}
-            style={[styles.tabItem,{position:'absolute',bottom:0,left:(WIDTH-SCALE(100))/2,right:WIDTH-SCALE(100),height:SCALE(120)}]}
-            onPress={() => jumpToIndex(1)}
-        >
-            <View
-                style={styles.tabItem}>
-                {this.props.renderIcon(TabScene)}
-                <Text style={{ ...styles.tabText,marginTop:SCALE(10),color }}>{this.props.getLabel(TabScene)}</Text>
-            </View>
-        </TouchableOpacity>
-        </View>
-        );
+                key={"centerView"}
+                style={[styles.tabItem,{position:'absolute',bottom:0,left:(WIDTH-SCALE(100))/2,right:WIDTH-SCALE(100),height:SCALE(120)}]}
+                onPress={() => jumpToIndex(1)}>
+                <View
+                    style={styles.tabItem}>
+                    {this.props.renderIcon(TabScene)}
+                    <Text style={{ ...styles.tabText,marginTop:SCALE(10),color }}>{this.props.getLabel(TabScene)}</Text>
+                </View>
+            </TouchableOpacity>
+        </View>);
     }
 }
 const styles = {

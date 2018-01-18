@@ -10,12 +10,14 @@ import {
     View,
     ScrollView,
     Image,
+    UIManager,
     TouchableOpacity,
     NativeModules,
     ImageBackground,
     DeviceEventEmitter,
-    requireNativeComponent
+    requireNativeComponent,
 } from 'react-native';
+const ReactNative = require('ReactNative');
 import PropTypes from 'prop-types';
 var PullLayout = requireNativeComponent('PullLayout', App);
 export default class App extends Component {
@@ -23,11 +25,19 @@ export default class App extends Component {
         super(props);
     }
 
+    //数据获取后回调 刷新结束
+    finishRefresh = ()=>{
+        UIManager.dispatchViewManagerCommand(ReactNative.findNodeHandle(this),
+            UIManager.PullLayout.Commands.FinishRefresh,["wuyunqiang"])
+    }
+
     render() {
         return (
             <PullLayout
-                ref={(c) => {this.pullLayout = c;}}
                 style={[{flex: 1,backgroundColor:'white',},this.props.style]}
+                EnableOverScrollDrag = {true}
+                EnableOverScrollBounce = {false}
+                onRefreshReleased={this.props.onRefreshReleased}
                 {...this.props}
             >
                 <View style={{flex: 1}}>
@@ -40,6 +50,16 @@ export default class App extends Component {
 
 PullLayout.propTypes = {
     ...View.propTypes,
-    finishRefresh:PropTypes.bool,//刷新完成 还原界面 只有属性值变化了原生界面才会更新 所以这里一定要变化
     onRefreshReleased:PropTypes.func,//网络请求加载数据
+    EnableOverScrollDrag:PropTypes.bool,//设置是否启用越界回弹
+    EnableOverScrollBounce:PropTypes.bool,//设置是否启用越界拖动（仿苹果效果）
+    DragRate:PropTypes.number, //显示拖动高度/真实拖动高度（默认0.5，阻尼效果）
+    HeaderMaxDragRate:PropTypes.number,//设置下拉最大高度和Header高度的比率（将会影响可以下拉的最大高度）
+    HeaderTriggerRate:PropTypes.number,//设置 触发刷新距离 与 HeaderHieght 的比率
+    ReboundDuration:PropTypes.number,//设置回弹动画时长
+    EnableRefresh:PropTypes.bool,//是否启用下拉刷新（默认启用）
+    EnableHeaderTranslationContent:PropTypes.bool,//设置是否启在下拉Header的同时下拉内容
+    DisableContentWhenRefresh:PropTypes.bool,//设置是否开启在刷新时候禁止操作内容视图
+    EnablePureScrollMode:PropTypes.bool,//设置是否开启纯滚动模式
+    EnableNestedScroll:PropTypes.bool,//设置是会否启用嵌套滚动功能（默认关闭+智能开启）
 };

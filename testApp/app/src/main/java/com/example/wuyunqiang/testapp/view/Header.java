@@ -2,7 +2,6 @@ package com.example.wuyunqiang.testapp.view;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -66,23 +63,6 @@ public class Header extends LinearLayout implements RefreshHeader {
     }
 
 
-    public void dispatchEvent(ReactContext reactContext,
-                                     String eventName,
-                                     @Nullable WritableMap params) {
-        if (reactContext==null) {
-            Log.i(TAG, "reactContext==null");
-        }else{
-//            reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-//                    this.getId(),//实例的ID native和js两个视图会依据getId()而关联在一起
-//                    eventName,//事件名称
-//                    params
-//            );
-            //原生模块发送事件
-            reactContext
-                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                    .emit(eventName, params);
-        }
-    }
     @NonNull
     public View getView() {
         return this;//真实的视图就是自己，不能返回null
@@ -158,11 +138,42 @@ public class Header extends LinearLayout implements RefreshHeader {
     @Override
     public void onRefreshReleased(RefreshLayout layout, int headerHeight, int extendHeight) {
 
-        Log.i(TAG,"onRefreshReleased执行之后");
 //        Log.i(TAG,"headHeight"+headerHeight);
 //        Log.i(TAG,"extendHeight"+extendHeight);
     }
     @Override
     public void setPrimaryColors(@ColorInt int ... colors){
+    }
+
+    public void setmHeaderText(TextView mHeaderText) {
+        this.mHeaderText = mHeaderText;
+    }
+
+    public void setmArrowView(PathsView mArrowView) {
+        this.mArrowView = mArrowView;
+    }
+
+    public void setmProgressView(ImageView mProgressView) {
+        this.mProgressView = mProgressView;
+    }
+
+    public void setmProgressDrawable(ProgressDrawable mProgressDrawable) {
+        this.mProgressDrawable = mProgressDrawable;
+    }
+
+    public TextView getmHeaderText() {
+        return mHeaderText;
+    }
+
+    public PathsView getmArrowView() {
+        return mArrowView;
+    }
+
+    public ImageView getmProgressView() {
+        return mProgressView;
+    }
+
+    public ProgressDrawable getmProgressDrawable() {
+        return mProgressDrawable;
     }
 }

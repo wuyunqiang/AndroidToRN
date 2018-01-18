@@ -17,6 +17,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0.1 "
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -36,6 +37,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.0'
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
     implementation "com.facebook.react:react-native:+" // From node_modules.

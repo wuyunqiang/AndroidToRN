@@ -1,6 +1,8 @@
 package com.example.wuyunqiang.testapp;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.example.wuyunqiang.testapp.codepush.CodePush;
@@ -30,6 +32,12 @@ public class MainApplication extends Application implements ReactApplication {
         instance = this;
         Log.i(TAG,"onCreate");
         SoLoader.init(this,false);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {

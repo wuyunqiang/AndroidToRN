@@ -27,7 +27,6 @@ export default class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            finishRefresh:false,
             loadmore:false,
             data:['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'],
         }
@@ -56,9 +55,9 @@ export default class App extends Component {
         console.log('params',params);
         setTimeout(()=>{
             this.setState({
-                finishRefresh:!this.state.finishRefresh,
                 data:['1sd','asd2','fdg3','4fdsa','5ewt','6sad','erg7','fasd8','1feerh','sda2','3fad','4hgsd','5fad','6fasd','asd7','8asdg','1adsg','2asd','3fasd','asd4','5afsd','6asd','7asd','8fasdfvas']
             })
+            this.pullLayout&&this.pullLayout.finishRefresh();
         },2000)
     };
 
@@ -80,9 +79,10 @@ export default class App extends Component {
 
     render() {
         return (
-            <PullLayout style={{flex: 1,backgroundColor:'white',}}
-                        onRefreshReleased = {this.refreshReleased}
-                        finishRefresh = {this.state.finishRefresh}>
+            <PullLayout
+                ref = {(pull)=>{this.pullLayout = pull}}
+                style={{flex: 1,backgroundColor:'white',}}
+                onRefreshReleased = {this.refreshReleased}>
                 <FlatList
                     style={{flex:1}}
                     ref={(c) => {this.scroll = c;}}

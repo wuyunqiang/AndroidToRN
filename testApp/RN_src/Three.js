@@ -36,20 +36,20 @@ export default class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            finishRefresh:false
         }
     }
 
     componentDidMount() {
     }
 
-    refreshReleased = async(params)=>{
+    refreshReleased = (params)=>{
+        alert("执行了这里")
         console.log('params',params);
         setTimeout(()=>{
             this.setState({
-                finishRefresh:!this.state.finishRefresh,//刷新完成 还原界面 只有属性值变化了原生界面才会更新 所以这里一定要这样写
                 data:['1sd','asd2','fdg3','4fdsa','5ewt','6sad','erg7','fasd8','1feerh','sda2','3fad','4hgsd','5fad','6fasd','asd7','8asdg','1adsg','2asd','3fasd','asd4','5afsd','6asd','7asd','8fasdfvas']
-            })
+            });
+            this.pullLayout&&this.pullLayout.finishRefresh();
         },2000)
     };
 
@@ -59,39 +59,41 @@ export default class App extends Component {
 
     render() {
         return (
-            <PullLayout style={{flex: 1,backgroundColor:'white',}}
-                        onRefreshReleased = {this.refreshReleased}//网络请求加载数据
-                        finishRefresh = {this.state.finishRefresh}>
-                <ScrollView style={{flex:1}}>
-                    <Text style={styles.hello}>使用scrollView测试原生下拉刷新</Text>
-                    <TouchableOpacity activeOpacity={0.5} onPress={this.testFlatList}>
+            <PullLayout
+                ref = {(pull)=>{this.pullLayout = pull}}
+                style={{flex: 1,backgroundColor:'white',}}
+                onRefreshReleased = {this.refreshReleased}>
+            <ScrollView
+                style={{flex:1}}>
+                <Text style={styles.hello}>使用scrollView测试原生下拉刷新</Text>
+                <TouchableOpacity activeOpacity={0.5} onPress={this.testFlatList}>
                     <View style={styles.Item}>
                         <Text style={styles.hello}>使用FlatList测试原生下拉刷新</Text></View>
-                    </TouchableOpacity>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                    <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-                </ScrollView>
+                </TouchableOpacity>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+            </ScrollView>
             </PullLayout>
         )
     }
