@@ -77,11 +77,19 @@ export default class App extends Component {
         this.props.navigation.navigate('LargeListPage');
     }
 
+    goToSGList =()=>{
+        this.props.navigation.navigate('SGList');
+    }
+
     onPullRelease= (resolve) => {
-        setTimeout(()=>{
+        this.timer = setTimeout(()=>{
             resolve&&resolve()
         },3000);
     };
+
+    componentWillUnmount() {
+        this.timer&&clearTimeout(this.timer);
+    }
 
     render() {
         return (<PullView
@@ -108,6 +116,10 @@ export default class App extends Component {
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={1} onPress={this.goToLargePull}>
                 <View style={styles.Item}><Text style={styles.hello}>使用largelist测试原生封装的下拉刷新</Text></View>
+            </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={1} onPress={this.goToSGList}>
+                <View style={styles.Item}><Text style={styles.hello}>使用SGList测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>

@@ -23,13 +23,15 @@ import One from './One'
 import Two from './Two'
 import Three from './Three'
 import Four from './Four'
-import LargeListPage from './LargeListPage';
+import SGList from './list/SGList/SGListPage'
+import LargeListPage from './list/LargeListPage';
 const Routes = {
     One:{screen: One},
     Two:{screen: Two},
     Three:{screen: Three},
     Four:{screen:Four},
-    LargeListPage:{screen:LargeListPage}
+    LargeListPage:{screen:LargeListPage},
+    SGList:{screen:SGList}
 };
 
 

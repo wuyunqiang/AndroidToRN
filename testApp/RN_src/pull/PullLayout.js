@@ -26,14 +26,16 @@ export default class App extends Component {
     }
 
     //数据获取后回调 刷新结束
-    finishRefresh = ()=>{
+    finishRefresh = (key)=>{
+        console.log("结束下拉"+key);
         UIManager.dispatchViewManagerCommand(ReactNative.findNodeHandle(this),
-            UIManager.PullLayout.Commands.FinishRefresh,["wuyunqiang"])
+            UIManager.PullLayout.Commands.FinishRefresh,[key])
     }
 
     render() {
         return (
             <PullLayout
+                ref = {(pull)=>{this.pullLayout = pull}}
                 style={[{flex: 1,backgroundColor:'white',},this.props.style]}
                 EnableOverScrollDrag = {true}
                 EnableOverScrollBounce = {false}
@@ -50,6 +52,7 @@ export default class App extends Component {
 
 PullLayout.propTypes = {
     ...View.propTypes,
+    Key:PropTypes.string.isRequired,//必须 否则监听回调可能无法被调用
     onRefreshReleased:PropTypes.func,//网络请求加载数据
     EnableOverScrollDrag:PropTypes.bool,//设置是否启用越界回弹
     EnableOverScrollBounce:PropTypes.bool,//设置是否启用越界拖动（仿苹果效果）

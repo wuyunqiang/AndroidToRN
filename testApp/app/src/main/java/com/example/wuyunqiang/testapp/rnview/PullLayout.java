@@ -12,12 +12,11 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.Map;
@@ -33,6 +32,8 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
     static final String TAG = "HeaderLayout";
     Header header;
     static final int FinishRefresh = 1;
+    String Key;
+    boolean CanRefresh = true;
 
     @Override
     public String getName() {
@@ -43,10 +44,10 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
     protected SmartRefreshLayout createViewInstance(ThemedReactContext reactContext) {
         SmartRefreshLayout  refreshLayout = (SmartRefreshLayout) LayoutInflater.from(reactContext).inflate(R.layout.activity_pull,null);
         header = new Header(reactContext);
-        refreshLayout.setRefreshHeader(header);
-        refreshLayout.setEnableLoadmoreWhenContentNotFull(false);
-        refreshLayout.setEnableLoadmore(false);//是否启用上拉加载功能
-        refreshLayout.setRefreshFooter(new ClassicsFooter(reactContext));
+        refreshLayout.setTag("PullLayout");
+//        refreshLayout.setEnableLoadmore(false);//是否启用上拉加载功能
+//        refreshLayout.setEnableLoadmoreWhenContentNotFull(false);
+//        refreshLayout.setRefreshFooter(new ClassicsFooter(reactContext));
         refreshLayout.setReboundDuration(400);//回弹动画时长（毫秒）
         refreshLayout.setHeaderTriggerRate(1.2f);//触发刷新距离 与 HeaderHieght 的比率1.0.4
         return refreshLayout;
@@ -55,6 +56,7 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
     @Override
     public void addView(SmartRefreshLayout parent, View child, int index) {
         super.addView(parent, child, index);
+        parent.addView(header,0);//设置header
         parent.onFinishInflate();//在这个方法里面添加子布局 这里要主动调用否则无法显示下拉刷新内容
     }
 
@@ -64,7 +66,11 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
             WritableMap params = Arguments.createMap();
             params.putString("from","native");
             Log.i(TAG,"开始刷新");
-            this.dispatchEvent(reactContext,refreshlayout,"onRefreshReleased",params);
+            if(CanRefresh){
+                CanRefresh = false;
+                this.dispatchEvent(reactContext,refreshlayout,"onRefreshReleased",params);
+            }
+
         }
     }
 
@@ -77,16 +83,18 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
             refreshlayout.finishRefresh();
         }else{
             Log.i(TAG, "发送消息事件 " +"refreshlayout View id : " + refreshlayout.getId());
-            reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                    refreshlayout.getId(),//实例的ID native和js两个视图会依据getId()而关联在一起
-                    eventName,//事件名称
-                    params
-            );
-            Log.d(TAG, "refreshlayout View id : " + refreshlayout.getId());
+            Log.i(TAG, "key:" + this.Key+eventName);
+//            reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+//                    refreshlayout.getId(),//实例的ID native和js两个视图会依据getId()而关联在一起
+//                    eventName,//事件名称
+//                    params
+//            );
+//            Log.d(TAG, "refreshlayout View id : " + refreshlayout.getId());
             //原生模块发送事件
-//            reactContext
-//                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-//                    .emit(eventName, params);
+
+            reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(this.Key+eventName, params);
         }
     }
 
@@ -99,6 +107,7 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
                 .put("onRefreshReleased", MapBuilder.of("registrationName", "onRefreshReleased"))
                 .build();
     }
+
 
     @Override
     protected void addEventEmitters(final ThemedReactContext reactContext, final SmartRefreshLayout view) {
@@ -122,12 +131,21 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
     public void receiveCommand(SmartRefreshLayout root, int commandId, @Nullable ReadableArray args) {
         super.receiveCommand(root, commandId, args);
         Log.i(TAG,args.getString(0));
+        String key = args.getString(0);
         switch (commandId){
             case FinishRefresh:
-                Log.i(TAG,"结束刷新");
-                root.finishRefresh();
+                if(this.Key.equals(key)){
+                    Log.i(TAG,"结束刷新");
+                    root.finishRefresh();
+                    CanRefresh = true;
+                }
                 return;
         }
+    }
+
+    @ReactProp(name = "Key")
+    public void setKey(final SmartRefreshLayout refreshLayout,final String Key) {
+        this.Key = Key;
     }
 
     @ReactProp(name = "HeaderText")

@@ -5,11 +5,13 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.wuyunqiang.testapp.R;
 import com.facebook.react.bridge.ReactContext;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshKernel;
@@ -30,7 +32,7 @@ public class Header extends LinearLayout implements RefreshHeader {
     private PathsView mArrowView;//下拉箭头
     private ImageView mProgressView;//刷新动画视图
     private ProgressDrawable mProgressDrawable;//刷新动画
-
+    LinearLayout header;
     private ReactContext reactContext;
 
     public Header(ReactContext context) {
@@ -45,9 +47,11 @@ public class Header extends LinearLayout implements RefreshHeader {
         super(context, attrs, defStyleAttr);
         this.initView(context);
     }
+
     private void initView(ReactContext context) {
         this.reactContext = context;
-        setGravity(Gravity.CENTER);
+        header = (LinearLayout)LayoutInflater.from(context).inflate(R.layout.header,null);
+//        setGravity(Gravity.CENTER);
         mHeaderText = new TextView(context);
         mHeaderText.setText("下拉开始刷新");
         mProgressDrawable = new ProgressDrawable();
@@ -55,11 +59,15 @@ public class Header extends LinearLayout implements RefreshHeader {
         mProgressView = new ImageView(context);
         mProgressView.setImageDrawable(mProgressDrawable);
         mArrowView.parserPaths("M20,12l-1.41,-1.41L13,16.17V4h-2v12.17l-5.58,-5.59L4,12l8,8 8,-8z");
-        addView(mProgressView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
-        addView(mArrowView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
-        addView(new View(context), DensityUtil.dp2px(20), DensityUtil.dp2px(20));
-        addView(mHeaderText, LinearLayout.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        setMinimumHeight(DensityUtil.dp2px(60));
+        header.addView(mProgressView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
+        header.addView(mArrowView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
+        header.addView(new View(context), DensityUtil.dp2px(20), DensityUtil.dp2px(20));
+        header.addView(mHeaderText, LinearLayout.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        params.gravity=Gravity.CENTER;
+//        this.setLayoutParams(params);
+        this.addView(header,params);
+//        setMinimumHeight(DensityUtil.dp2px(60));
     }
 
 

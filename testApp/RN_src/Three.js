@@ -36,20 +36,27 @@ export default class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-        }
+        };
+        this.KEY = "Three"
     }
 
     componentDidMount() {
+        this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
     }
 
-    refreshReleased = (params)=>{
-        alert("执行了这里")
+    componentWillUnmount() {
+        this.timer&&clearTimeout(this.timer);
+        this.subscription&&this.subscription.remove();
+        this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
+    }
+
+    refreshReleased = async(params)=>{
         console.log('params',params);
-        setTimeout(()=>{
+        this.timer = setTimeout(()=>{
             this.setState({
                 data:['1sd','asd2','fdg3','4fdsa','5ewt','6sad','erg7','fasd8','1feerh','sda2','3fad','4hgsd','5fad','6fasd','asd7','8asdg','1adsg','2asd','3fasd','asd4','5afsd','6asd','7asd','8fasdfvas']
             });
-            this.pullLayout&&this.pullLayout.finishRefresh();
+            this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
         },2000)
     };
 
@@ -57,18 +64,27 @@ export default class App extends Component {
         this.props.navigation.navigate('Four')
     }
 
+    goToLargePull = ()=>{
+        this.props.navigation.navigate('LargeListPage');
+    }
+
+
     render() {
         return (
             <PullLayout
+                Key = {this.KEY}
                 ref = {(pull)=>{this.pullLayout = pull}}
                 style={{flex: 1,backgroundColor:'white',}}
-                onRefreshReleased = {this.refreshReleased}>
+                >
             <ScrollView
                 style={{flex:1}}>
                 <Text style={styles.hello}>使用scrollView测试原生下拉刷新</Text>
                 <TouchableOpacity activeOpacity={0.5} onPress={this.testFlatList}>
                     <View style={styles.Item}>
                         <Text style={styles.hello}>使用FlatList测试原生下拉刷新</Text></View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={1} onPress={this.goToLargePull}>
+                    <View style={styles.Item}><Text style={styles.hello}>使用largelist测试原生封装的下拉刷新</Text></View>
                 </TouchableOpacity>
                 <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
                 <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
