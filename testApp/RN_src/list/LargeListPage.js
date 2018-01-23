@@ -19,6 +19,10 @@ export default class LargeListPage extends React.Component {
     messages;
     largeList;
 
+    static navigationOptions = ({navigation})=> ({
+        title:'LargeList'
+    })
+
     constructor(props) {
         super(props);
         this.state = { refreshing: false };

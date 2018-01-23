@@ -22,7 +22,7 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/Car
 import One from './One'
 import Two from './Two'
 import Three from './Three'
-import Four from './Four'
+import Four from './list/FlatPage'
 import SGList from './list/SGList/SGListPage'
 import LargeListPage from './list/LargeListPage';
 const Routes = {

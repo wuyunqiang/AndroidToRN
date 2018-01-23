@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.example.wuyunqiang.testapp.codepush.CodePush;
+import com.example.wuyunqiang.testapp.fastimage.FastImageViewPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -60,6 +61,7 @@ public class MainApplication extends Application implements ReactApplication {
             List<ReactPackage> modules = new ArrayList<>();
             modules.add(new MainReactPackage());
             modules.add(new RNPackage());
+            modules.add(new FastImageViewPackage());
             modules.add(new CodePush("M9ezsCkj7OUhZcXONMg4accqVUu54ksvOXqog",
                     getApplicationContext(), BuildConfig.DEBUG,"http://172.28.110.180:3000/"));
             return modules;

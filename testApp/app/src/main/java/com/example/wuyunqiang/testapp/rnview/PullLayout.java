@@ -89,9 +89,7 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
 //                    eventName,//事件名称
 //                    params
 //            );
-//            Log.d(TAG, "refreshlayout View id : " + refreshlayout.getId());
             //原生模块发送事件
-
             reactContext
                     .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(this.Key+eventName, params);

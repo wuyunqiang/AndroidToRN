@@ -21,15 +21,32 @@ import {
     requireNativeComponent,
     ActivityIndicator
 } from 'react-native';
-import PullLayout from './pull/PullLayout'
+import Card from './SGList/Card';
+import DataSource from './SGList/CardListDataSource';
+import PullLayout from '../pull/PullLayout'
 export default class App extends Component {
+
+    static navigationOptions = ({navigation})=> ({
+        title:'FlatList'
+    })
 
     constructor(props){
         super(props);
         this.state = {
-            loadmore:false,
-            data:['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'],
-        }
+            deals: [],
+        };
+        this.cache = {
+            offset: 0,
+            limit: 10,
+            lat: 45.52,
+            lng: -122.681944,
+        };
+
+        let self = this;
+        DataSource.fetch(this.cache, (err, res) => {
+            if (err) console.warn(err);
+            else self.setState({deals:res.body.deals});
+        });
         this.KEY = "Four";
     }
 
@@ -38,28 +55,39 @@ export default class App extends Component {
     }
 
     renderRowView = ({item, index, separators})=>{
-        return (<View style={styles.Item}><Text>{item}</Text></View>);
+        return (
+            <Card deal={item} />
+        );
     };
 
     loadMore = async(page)=>{
+        this.cache.offset += 10;
+        var self = this;
         this.setState({
             loadmore:true,
         });
-        this.loadertime = setTimeout(()=>{
-            this.setState({
-                loadmore:false,
-                data:this.state.data.concat(['1sd','asd2','fdg3','4fdsa','5ewt','6sad','erg7','fasd8','1feerh','sda2','3fad','4hgsd','5fad','6fasd','asd7','8asdg','1adsg','2asd','3fasd','asd4','5afsd','6asd','7asd','8fasdfvas'])
-            })
-        },2000)
+        DataSource.fetch(this.cache, (err, res) => {
+            if (err) console.warn(err);
+            else self.setState({deals:self.state.deals.concat(res.body.deals),loadmore:false,}); // concat deals to the end of the array
+        });
+
+        // this.loadertime = setTimeout(()=>{
+        //     this.setState({
+        //         loadmore:false,
+        //         data:this.state.data.concat(['1sd','asd2','fdg3','4fdsa','5ewt','6sad','erg7','fasd8','1feerh','sda2','3fad','4hgsd','5fad','6fasd','asd7','8asdg','1adsg','2asd','3fasd','asd4','5afsd','6asd','7asd','8fasdfvas'])
+        //     })
+        // },2000)
     };
 
     refreshReleased = async(params)=>{
-        this.refreshtime = setTimeout(()=>{
-            this.setState({
-                data:['1sd','asd2','fdg3','4fdsa','5ewt','6sad','erg7','fasd8','1feerh','sda2','3fad','4hgsd','5fad','6fasd','asd7','8asdg','1adsg','2asd','3fasd','asd4','5afsd','6asd','7asd','8fasdfvas']
-            })
-            this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
-        },2000)
+        let self = this;
+        DataSource.fetch(this.cache, (err, res) => {
+            if (err) console.warn(err);
+            else {
+                self.setState({deals:res.body.deals});
+                this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
+            }
+        });
     };
 
     componentWillUnmount() {
@@ -98,17 +126,16 @@ export default class App extends Component {
                     ref={(c) => {this.scroll = c;}}
                     refreshing={false}
                     keyExtractor={(item, index) => {return index}}
-                    onEndReachedThreshold={1}
-                    data={this.state.data}
-                    windowSize={10}
-                    updateCellsBatchingPeriod={1}
-                    maxToRenderPerBatch={10}
+                    onEndReachedThreshold={20}
+                    data={this.state.deals}
+                    windowSize={20}
+                    updateCellsBatchingPeriod={10}
+                    maxToRenderPerBatch={20}
                     renderItem={this.renderRowView}
                     onEndReached={this.loadMore}
                     ListFooterComponent={this._renderFoot}
                     disableVirtualization={false}
                 />
-
             </PullLayout>
         )
     }

@@ -60,10 +60,14 @@ export default class SGListPage extends Component {
 
     refreshReleased = async(params)=>{
         // alert("执行了这里 Three");
-        console.log('params',params);
-        this.timer = setTimeout(()=>{
-            this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
-        },2000)
+        let self = this;
+        DataSource.fetch(this.cache, (err, res) => {
+            if (err) console.warn(err);
+            else {
+                self.setState({deals:res.body.deals});
+                this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
+            }
+        });
     };
 
     renderRow(rowData, sectionID, rowID) {
