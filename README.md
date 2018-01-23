@@ -1,11 +1,12 @@
 # AndroidToRN
 原生android中嵌入React Native<br>
-使用codepush热更新
+使用codepush热更新<br>
+下拉刷新+大列表+大量图片<br>
 # 环境：
 Android studio3.0<br>
-react native 0.50<br>
+react native 0.52<br>
 Mac 10.12.6 <br>
-如有问题或者需要我添加什么请提issue
+# 如有问题或者需要我添加什么请提issue，我会去实现的 
 
 
 项目下载后<br>
@@ -24,6 +25,10 @@ change react.gradle的14行reactRoot路径<br>
 6：andorid studio 运行项目即可<br>
 
 # ChangeLog:<br>
+1.0.5<br>
+原生下拉刷新+大列表(Flatlist||SGListView)+大量图片 不会卡顿<br>
+![largerlist.gif](http://upload-images.jianshu.io/upload_images/3353755-e8a7c8549d7b068b.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 1.0.4<br>
 1:新增pullLayout->此组件是原生下拉刷新组件的封装（因为android下拉刷新组件一直存在性能问题所以自己封装了一个）<br>
 组件基于[SmartRefreshLayout](https://github.com/wuyunqiang/react-native-pullview)仅限Android使用<br>
