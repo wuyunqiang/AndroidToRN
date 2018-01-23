@@ -9,7 +9,8 @@ Android studio3.0<br>
 react native 0.52<br>
 Mac 10.12.6 <br>
 # 如有问题或者需要我添加什么请提issue，我会去实现的 
-
+CSDN：[http://blog.csdn.net/u014041033?viewmode=contents](http://blog.csdn.net/u014041033?viewmode=contents)<br>
+简书：[简书](http://www.jianshu.com/u/1386d6b454e5) <br>
 
 项目下载后<br>
 1: cd testApp<br>
