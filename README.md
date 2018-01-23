@@ -2,7 +2,7 @@
 原生android中嵌入React Native<br>
 封装原生view,viewgroup,原生module<br>
 使用codepush热更新<br>
-下拉刷新+大列表+大量图片<br>
+下拉刷新+无限列表+大量图片<br>
 
 # 环境：
 Android studio3.0<br>
