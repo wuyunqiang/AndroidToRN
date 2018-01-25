@@ -28,7 +28,7 @@ export default class App extends Component {
 
     static navigationOptions = ({navigation})=> ({
         title:'FlatList'
-    })
+    });
 
     constructor(props){
         super(props);
@@ -43,14 +43,42 @@ export default class App extends Component {
         };
 
         let self = this;
-        DataSource.fetch(this.cache, (err, res) => {
-            if (err) console.warn(err);
-            else self.setState({deals:res.body.deals});
-        });
+        // DataSource.fetch(this.cache, (err, res) => {
+        //     if (err) console.warn(err);
+        //     else self.setState({deals:res.body.deals});
+        // });
         this.KEY = "Four";
     }
 
+
+    getData = async(params)=>{
+        let query = "https://api.groupon.com/v2/deals?offset=" + this.cache.offset +
+            "&client_id=" + "1a36af586a2ced1684fea9ecdc7c1f6f" +
+            "&client_version_id=" + "16.2" +
+            "&division_id=portland&include_travel_bookable_deals=true&lang=en" +
+            "&lat=" + this.cache.lat +
+            "&limit=" + this.cache.limit +
+            "&lng=" + this.cache.lng + "&location_time=2015-06-09T22%3A56%3A19Z&metadata=true&secure_assets=false&show=id%2Ctitle%2CplacementPriority%2CsidebarImageUrl%2CendAt%2CdealTypes%2Cmerchant%2CisSoldOut%2CsoldQuantity%2CsoldQuantityMessage%2Cstatus%2Coptions%28images%2Ctrait%2CpricingMetadata%2CschedulerOptions%29%2CannouncementTitle%2ClargeImageUrl%2Cgrid4ImageUrl%2Cgrid6ImageUrl%2CmediumImageUrl%2CshippingAddressRequired%2CredemptionLocation%2Cchannels%2CdealUrl%2Cdivision%2CpitchHtml%2ChighlightsHtml%2CisEarly%2CisExtended%2CredemptionLocations%2CisTipped%2CtippingPoint%2ClocationNote%2CspecificAttributes%2CisTravelBookableDeal%2CisMerchandisingDeal%2Cdefault%2Cuuid%2Ctraits%2Cimages&zero_day=true";
+
+        let data = await HttpUtil.GET(query);
+        if(data){
+            if(params==='refresh'){
+                this.setState({
+                    deals:data.deals
+                });
+                this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
+            }else{
+                this.setState({
+                    loadmore:false,
+                    deals:this.state.deals.concat(data.deals),
+                })
+            }
+        }
+        console.log('data',data);
+    };
+
     componentDidMount() {
+        this.getData('loadMore');
         this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
     }
 
@@ -62,14 +90,14 @@ export default class App extends Component {
 
     loadMore = async(page)=>{
         this.cache.offset += 10;
-        var self = this;
         this.setState({
             loadmore:true,
         });
-        DataSource.fetch(this.cache, (err, res) => {
-            if (err) console.warn(err);
-            else self.setState({deals:self.state.deals.concat(res.body.deals),loadmore:false,}); // concat deals to the end of the array
-        });
+        this.getData('loadMore');
+        // DataSource.fetch(this.cache, (err, res) => {
+        //     if (err) console.warn(err);
+        //     else self.setState({deals:self.state.deals.concat(res.body.deals),loadmore:false,}); // concat deals to the end of the array
+        // });
 
         // this.loadertime = setTimeout(()=>{
         //     this.setState({
@@ -80,14 +108,8 @@ export default class App extends Component {
     };
 
     refreshReleased = async(params)=>{
-        let self = this;
-        DataSource.fetch(this.cache, (err, res) => {
-            if (err) console.warn(err);
-            else {
-                self.setState({deals:res.body.deals});
-                this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
-            }
-        });
+        console.log('params',params);
+        this.getData('refresh');
     };
 
     componentWillUnmount() {

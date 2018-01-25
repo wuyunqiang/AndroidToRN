@@ -30,7 +30,7 @@ export default class App extends Component {
         console.log("结束下拉"+key);
         UIManager.dispatchViewManagerCommand(ReactNative.findNodeHandle(this),
             UIManager.PullLayout.Commands.FinishRefresh,[key])
-    }
+    };
 
     render() {
         return (
@@ -39,6 +39,7 @@ export default class App extends Component {
                 style={[{flex: 1,backgroundColor:'white',},this.props.style]}
                 EnableOverScrollDrag = {true}
                 EnableOverScrollBounce = {false}
+                DisableContentWhenRefresh = {false}
                 onRefreshReleased={this.props.onRefreshReleased}
                 {...this.props}
             >

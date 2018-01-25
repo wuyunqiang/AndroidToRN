@@ -12,22 +12,36 @@ import {
     Text,
     View,
     Image,
+    BackHandler,
     TouchableOpacity,
     NativeModules,
     ImageBackground,
     DeviceEventEmitter
 } from 'react-native';
-import PullView from './pull/PullView'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as homeCreators from '../actions/home';
+import PullView from '../pull/PullView'
 import CodePush from 'react-native-code-push';
-export default class App extends Component {
-
+class App extends Component {
     static navigationOptions = ({navigation})=> ({
        tabBarLabel:'第一页',
         tabBarIcon: ({tintColor,focused}) => (
             <Image
-                style={{width:Platform.OS==='ios'?45/2:45/2,height:Platform.OS==='ios'?41/2:41/2}}
+                style={{width:45/2,height:41/2}}
                 source={focused?AppImages.tab.home_active:AppImages.tab.home_unactive}/>
         ),
+        header:(<View style={{flexDirection:'row', alignItems:'center' ,height:SCALE(80), backgroundColor: Color.C5995f5, borderWidth:0, borderBottomWidth:0,}}>
+            <TouchableOpacity activeOpacity={1} onPress={()=>{
+                NativeModules.NativeUtil.Finish();
+            }}>
+                <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+                    <Image
+                        source={AppImages.Home.back}
+                        style={{width:SCALE(20),height:SCALE(37)}}/>
+                </View>
+            </TouchableOpacity>
+        </View>)
 
 })
 
@@ -37,11 +51,49 @@ export default class App extends Component {
     }
 
     componentDidMount() {
+        console.log('this.props',this.props);
         console.log("One componentDidMount ");
-        DeviceEventEmitter.addListener('Native', (...data) =>{
+        this.NativeListener = DeviceEventEmitter.addListener('Native', (...data) =>{
             console.log('MyReactActivity',...data);
         });
+
+        if(Platform.OS==='android'){
+            BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
+        }
     }
+
+    componentWillUnmount() {
+        this.NativeListener.remove();
+        this.timer&&clearTimeout(this.timer);
+        if(Platform.OS==='android'){
+            BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
+        }
+    }
+
+    onBackAndroid = (params) => {
+        // 最近2秒内按过back键，可以退出应用。
+        // if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+        //     return false;
+        // }
+        // this.lastBackPressed = Date.now();
+        const nav = this.props.nav;//获取redux的navigation state
+        console.log('onBackAndroid nav', nav);
+        const routes = nav.routes;
+        if (routes.length > 1) {
+            console.log('返回上一级');
+            this.props.navigation.goBack(null);
+            return true;
+        }else if(routes[0].routes[routes[0].index].routeName!=routes[0].routes[0].routeName){//当前页面不等于第一个页面 跳转至第一个页面
+            this.props.navigation.navigate(routes[0].routes[0].routeName);
+            console.log('跳转至首页');
+            return true;
+        }else{
+            console.log('结束activity');
+            NativeModules.NativeUtil.Finish();
+            return true;
+        }
+
+    };
 
 
     hotupdate = ()=>{
@@ -51,7 +103,7 @@ export default class App extends Component {
                 appendReleaseDescription:true,
                 descriptionPrefix:'更新内容:',
                 mandatoryContinueButtonLabel:'更新',
-                mandatoryUpdateMessage:'好贷宝有新版本了，请您及时更新',
+                mandatoryUpdateMessage:'有新版本了，请您及时更新',
                 optionalInstallButtonLabel: '立即更新',
                 optionalIgnoreButtonLabel: '稍后',
                 optionalUpdateMessage:'有新版本了，是否更新？',
@@ -87,9 +139,7 @@ export default class App extends Component {
         },3000);
     };
 
-    componentWillUnmount() {
-        this.timer&&clearTimeout(this.timer);
-    }
+
 
     render() {
         return (<PullView
@@ -135,10 +185,27 @@ export default class App extends Component {
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
         </PullView>)
     }
 }
+
+
+const mapStateToProps = (state) => {
+    const { home,nav } = state;
+    return {
+        home,
+        nav
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    const homeActions = bindActionCreators(homeCreators, dispatch);
+    return {
+        homeActions
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
     container: {

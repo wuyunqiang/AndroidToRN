@@ -17,13 +17,13 @@ import {
     ImageBackground,
     DeviceEventEmitter
 } from 'react-native';
-import PullList from './pull/PullList'
+import PullList from '../pull/PullList'
 let rowData = ['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'];
 export default class App extends Component {
     static navigationOptions = ({navigation})=> ({
         tabBarLabel:'第二页',
         tabBarIcon: ({ tintColor,focused }) => (
-            <Image style={{width:Platform.OS==='ios'?38/2:38,height:Platform.OS==='ios'?40/2:40}}
+            <Image style={{width:38,height:40}}
                    source={focused?AppImages.tab.project_active:AppImages.tab.project_unactive}/>
         ),
     })

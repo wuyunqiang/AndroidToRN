@@ -19,7 +19,7 @@ import {
     DeviceEventEmitter,
     requireNativeComponent
 } from 'react-native';
-import PullLayout from './pull/PullLayout'
+import PullLayout from '../pull/PullLayout'
 
 let rowData = ['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'];
 export default class App extends Component {
@@ -27,7 +27,7 @@ export default class App extends Component {
     static navigationOptions = ({navigation})=> ({
         tabBarLabel:'第三页',
         tabBarIcon: ({ tintColor,focused }) => (
-            <Image style={{width:Platform.OS==='ios'?42/2:42/2,height:Platform.OS==='ios'?43/2:43/2}}
+            <Image style={{width:42/2,height:43/2}}
                    source={focused?AppImages.tab.profile_active:AppImages.tab.profile_unactive}/>
         ),
 

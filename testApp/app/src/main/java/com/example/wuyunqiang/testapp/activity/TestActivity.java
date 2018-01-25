@@ -1,12 +1,15 @@
-package com.example.wuyunqiang.testapp;
+package com.example.wuyunqiang.testapp.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.wuyunqiang.testapp.MyReactActivity;
+import com.example.wuyunqiang.testapp.R;
 import com.example.wuyunqiang.testapp.preloadreact.ReactNativePreLoader;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactRootView;
@@ -16,6 +19,7 @@ import javax.annotation.Nullable;
 public class TestActivity extends ReactActivity {
 
 
+    static final String TAG = "TestActivity";
     private ReactRootView mReactRootView;
 
     @Nullable
@@ -62,12 +66,15 @@ public class TestActivity extends ReactActivity {
     protected void onDestroy() {
         super.onDestroy();
         ReactNativePreLoader.deatchView("TestActivity");
+        Log.i(TAG,"onDestroy");
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Log.i(TAG,"onBackPressed");
         this.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_left);
     }
 
     public void onClick(View view) {
@@ -75,6 +82,7 @@ public class TestActivity extends ReactActivity {
             Intent it = new Intent(this,MyReactActivity.class);
             it.putExtra("name","wuyunqiang");
             startActivity(it);
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
         }
     }
 }

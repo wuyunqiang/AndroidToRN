@@ -67,7 +67,7 @@ public class Header extends LinearLayout implements RefreshHeader {
         params.gravity=Gravity.CENTER;
 //        this.setLayoutParams(params);
         this.addView(header,params);
-//        setMinimumHeight(DensityUtil.dp2px(60));
+        setMinimumHeight(DensityUtil.dp2px(60));
     }
 
 

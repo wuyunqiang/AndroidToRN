@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.wuyunqiang.testapp.activity.TestActivity;
 import com.example.wuyunqiang.testapp.preloadreact.ReactNativePreLoader;
 
-import org.json.JSONObject;
-
 public class MainActivity extends AppCompatActivity {
-    static JSONObject jsonObject;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
             Intent it = new Intent(this,TestActivity.class);
             it.putExtra("name","wuyunqiang");
             startActivity(it);
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
         }
     }
 

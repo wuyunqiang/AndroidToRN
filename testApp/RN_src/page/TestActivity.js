@@ -15,7 +15,6 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 let WIDTH = Dimensions.get('window').width;
-import CodePush from 'react-native-code-push';
 
 export default class App extends Component {
 
@@ -25,19 +24,6 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        // let data =  CodePush.sync({
-        //     updateDialog: {
-        //         appendReleaseDescription:true,
-        //         descriptionPrefix:'更新内容:',
-        //         mandatoryContinueButtonLabel:'更新',
-        //         mandatoryUpdateMessage:'好贷宝有新版本了，请您及时更新',
-        //         optionalInstallButtonLabel: '立即更新',
-        //         optionalIgnoreButtonLabel: '稍后',
-        //         optionalUpdateMessage:'有新版本了，是否更新？',
-        //         title: '提示'
-        //     },
-        //     installMode: CodePush.InstallMode.IMMEDIATE
-        // });
         console.log("TestActivity componentDidMount")
     }
 

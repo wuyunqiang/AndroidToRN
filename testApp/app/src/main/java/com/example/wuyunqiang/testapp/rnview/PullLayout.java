@@ -17,6 +17,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.Map;
@@ -42,21 +43,29 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
 
     @Override
     protected SmartRefreshLayout createViewInstance(ThemedReactContext reactContext) {
-        SmartRefreshLayout  refreshLayout = (SmartRefreshLayout) LayoutInflater.from(reactContext).inflate(R.layout.activity_pull,null);
+        SmartRefreshLayout  refreshLayout = (SmartRefreshLayout) LayoutInflater.from(reactContext).inflate(R.layout.pull_layout,null);
         header = new Header(reactContext);
         refreshLayout.setTag("PullLayout");
-//        refreshLayout.setEnableLoadmore(false);//是否启用上拉加载功能
-//        refreshLayout.setEnableLoadmoreWhenContentNotFull(false);
-//        refreshLayout.setRefreshFooter(new ClassicsFooter(reactContext));
+        refreshLayout.setRefreshHeader(header);
+        refreshLayout.setEnableLoadmore(false);//是否启用上拉加载功能
+        refreshLayout.setEnableLoadmoreWhenContentNotFull(false);
+        refreshLayout.setRefreshFooter(new ClassicsFooter(reactContext));
         refreshLayout.setReboundDuration(400);//回弹动画时长（毫秒）
         refreshLayout.setHeaderTriggerRate(1.2f);//触发刷新距离 与 HeaderHieght 的比率1.0.4
         return refreshLayout;
     }
 
+
+    @Override
+    public void onDropViewInstance(SmartRefreshLayout view) {
+        view.finishRefresh();
+//        view.removeAllViews();//
+        super.onDropViewInstance(view);
+    }
+
     @Override
     public void addView(SmartRefreshLayout parent, View child, int index) {
         super.addView(parent, child, index);
-        parent.addView(header,0);//设置header
         parent.onFinishInflate();//在这个方法里面添加子布局 这里要主动调用否则无法显示下拉刷新内容
     }
 

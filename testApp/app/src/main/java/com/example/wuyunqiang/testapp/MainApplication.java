@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
+import com.example.wuyunqiang.testapp.RNFetchBlob.RNFetchBlobPackage;
 import com.example.wuyunqiang.testapp.codepush.CodePush;
 import com.example.wuyunqiang.testapp.fastimage.FastImageViewPackage;
 import com.facebook.react.ReactApplication;
@@ -62,6 +63,7 @@ public class MainApplication extends Application implements ReactApplication {
             modules.add(new MainReactPackage());
             modules.add(new RNPackage());
             modules.add(new FastImageViewPackage());
+            modules.add(new RNFetchBlobPackage());
             modules.add(new CodePush("M9ezsCkj7OUhZcXONMg4accqVUu54ksvOXqog",
                     getApplicationContext(), BuildConfig.DEBUG,"http://172.28.110.180:3000/"));
             return modules;
