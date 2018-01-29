@@ -6,7 +6,7 @@ project.ext.react = [
 ]
 
 apply from: "../node_modules/react-native/react.gradle"
-apply from: "../node_modules/react-native-code-push/android/codepush.gradle"
+apply from: "codepush.gradle"
 
 android {
     compileSdkVersion 26
@@ -18,9 +18,18 @@ android {
         versionCode 1
         versionName "1.0.1 "
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+    }
+
+
+    signingConfigs {
+        release {
+            storeFile file('/Users/wuyunqiang/Desktop/wuyunqiang.jks')
+            storePassword 'wuyunqiang'
+            keyAlias 'wuyunqiang'
+            keyPassword 'wuyunqiang'
         }
     }
 
@@ -28,11 +37,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
-    }
-
-    aaptOptions {
-        cruncherEnabled = false
     }
 }
 
@@ -42,11 +48,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
-    implementation "com.facebook.react:react-native:+" // From node_modules.
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile "com.facebook.react:react-native:+" // From node_modules.
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

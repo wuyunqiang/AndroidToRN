@@ -25,13 +25,15 @@ import Three from './page/Three'
 import Four from './list/FlatPage'
 import SGList from './list/SGList/SGListPage'
 import LargeListPage from './list/LargeListPage';
+import WaterFallPage from './page/WaterFallPage'
 const Routes = {
     One:{screen: One},
     Two:{screen: Two},
     Three:{screen: Three},
     Four:{screen:Four},
     LargeListPage:{screen:LargeListPage},
-    SGList:{screen:SGList}
+    SGList:{screen:SGList},
+    WaterFallPage:{screen:WaterFallPage}
 };
 
 

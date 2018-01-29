@@ -133,6 +133,10 @@ class App extends Component {
         this.props.navigation.navigate('SGList');
     }
 
+    goToWaterFallPage =()=>{
+        this.props.navigation.navigate('WaterFallPage');
+    }
+
     onPullRelease= (resolve) => {
         this.timer = setTimeout(()=>{
             resolve&&resolve()
@@ -148,12 +152,15 @@ class App extends Component {
             style={{width: WIDTH, backgroundColor:Color.f5f5f5}}
             onPullRelease={this.onPullRelease}>
             <Text style={styles.hello}>使用ScrollView测试PullView </Text>
+
             <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:true,})}>
                 <View style={styles.Item}><Text style={styles.hello}>使用Flatlist测试pullList有数据</Text></View>
             </TouchableOpacity>
+
             <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:false})}>
                 <View style={styles.Item}><Text style={styles.hello}>使用Flatlist测试pullList没有数据</Text></View>
             </TouchableOpacity>
+
             <TouchableOpacity activeOpacity={1} onPress={this.hotupdate}>
                 <View style={styles.Item}><Text style={styles.hello}>测试codepush</Text></View>
                 </TouchableOpacity>
@@ -161,9 +168,11 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.goToNativePull}>
                 <View style={styles.Item}><Text style={styles.hello}>使用ScrollView测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
+
             <TouchableOpacity activeOpacity={1} onPress={this.goToFlatListPull}>
                 <View style={styles.Item}><Text style={styles.hello}>使用flatlist测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
+
             <TouchableOpacity activeOpacity={1} onPress={this.goToLargePull}>
                 <View style={styles.Item}><Text style={styles.hello}>使用largelist测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
@@ -171,7 +180,10 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.goToSGList}>
                 <View style={styles.Item}><Text style={styles.hello}>使用SGList测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+
+            <TouchableOpacity activeOpacity={1} onPress={this.goToWaterFallPage}>
+                <View style={styles.Item}><Text style={styles.hello}>测试瀑布流</Text></View>
+            </TouchableOpacity>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
