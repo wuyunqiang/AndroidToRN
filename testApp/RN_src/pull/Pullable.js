@@ -56,6 +56,8 @@ export default class extends Component {
         this.gesturePosition = {x: 0, y: 0};
         this.onScroll = this.onScroll.bind(this);
         this.onLayout = this.onLayout.bind(this);
+        this.BeginRefresh = this.BeginRefresh.bind(this);
+        this.StopRefresh = this.StopRefresh.bind(this);
         this.isPullState = this.isPullState.bind(this);
         this.resetDefaultXYHandler = this.resetDefaultXYHandler.bind(this);
         this.resolveHandler = this.resolveHandler.bind(this);
@@ -98,6 +100,17 @@ export default class extends Component {
         } else {
             return false;
         }
+    }
+
+    BeginRefresh(){
+        console.log('BeginRefresh');
+        this.state.pullPan.setValue({x: this.defaultXY.x, y: this.topIndicatorHeight});
+        this.setFlag(flagPullrelease);
+    }
+
+    StopRefresh(){
+        console.log('StopRefresh');
+        this.resetDefaultXYHandler();
     }
 
     onPanResponderMove(e, gesture) {
@@ -172,6 +185,7 @@ export default class extends Component {
     setFlag(flag) {
         if (this.flag != flag) {
             this.flag = flag;
+            console.log('设置inderTop',this.flag);
             this.renderTopIndicator();
         }
     }
@@ -315,7 +329,9 @@ export default class extends Component {
             />
         )
     }
+
     defaultTopIndicatorRender(pulling, pullok, pullrelease, gesturePosition) {
+        console.log('pulling, pullok, pullrelease',pulling, pullok, pullrelease);
         if (pulling) {
             Animated.timing(this.state.arrowAngle, {
                 toValue: 0,

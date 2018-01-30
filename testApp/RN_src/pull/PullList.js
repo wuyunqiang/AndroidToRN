@@ -113,6 +113,8 @@ export default class PullList extends Pullable {
         })
     };
 
+
+
     /**
      * 对外提供API, 出错重新加载数据
      */

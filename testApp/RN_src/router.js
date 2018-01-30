@@ -17,6 +17,7 @@ import {
     Image,
 } from 'react-native';
 import { StackNavigator,TabNavigator,NavigationActions } from 'react-navigation';
+import { enhance } from 'react-navigation-addons';
 import Tab from './component/Tab'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import One from './page/One'

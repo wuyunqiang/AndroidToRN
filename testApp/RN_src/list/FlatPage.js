@@ -18,6 +18,7 @@ import {
     NativeModules,
     ImageBackground,
     DeviceEventEmitter,
+    BackHandler,
     requireNativeComponent,
     ActivityIndicator
 } from 'react-native';
@@ -78,6 +79,7 @@ export default class App extends Component {
     };
 
     componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
         this.getData('loadMore');
         this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
     }
@@ -112,7 +114,14 @@ export default class App extends Component {
         this.getData('refresh');
     };
 
+    onBackAndroid = ()=>{
+        console.log('FlagPage this.onBackAndroid');
+        this.props.navigation.goBack(null);
+        return true;
+    };
+
     componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
         this.pullLayout&&this.pullLayout.finishRefresh(this.KEY);
         this.loadertime &&clearTimeout(this.loadertime);
         this.refreshtime &&clearTimeout(this.refreshtime);

@@ -53,7 +53,7 @@ class App extends Component {
     componentDidMount() {
         console.log('this.props',this.props);
         console.log("One componentDidMount ");
-        this.NativeListener = DeviceEventEmitter.addListener('Native', (...data) =>{
+        this.NativeListener = DeviceEventEmitter.addListener('asdfasdfNative', (...data) =>{
             console.log('MyReactActivity',...data);
         });
 
@@ -78,6 +78,7 @@ class App extends Component {
         // this.lastBackPressed = Date.now();
         const nav = this.props.nav;//获取redux的navigation state
         console.log('onBackAndroid nav', nav);
+        console.log('one 执行了这里');
         const routes = nav.routes;
         if (routes.length > 1) {
             console.log('返回上一级');
@@ -143,10 +144,16 @@ class App extends Component {
         },3000);
     };
 
+    ClickRefresh = ()=>{
+        DeviceEventEmitter.emit('asdfasdfNative',{data:'hello'});
+    }
+
+
 
 
     render() {
         return (<PullView
+            ref = {(pull)=>this.pullview = pull}
             showsVerticalScrollIndicator={false}
             overScrollMode = {'always'}
             style={{width: WIDTH, backgroundColor:Color.f5f5f5}}
@@ -180,11 +187,9 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.goToSGList}>
                 <View style={styles.Item}><Text style={styles.hello}>使用SGList测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={this.goToWaterFallPage}>
-                <View style={styles.Item}><Text style={styles.hello}>测试瀑布流</Text></View>
+            <TouchableOpacity activeOpacity={1} onPress={this.ClickRefresh}>
+                <View style={styles.Item}><Text style={styles.hello}>ClickRefresh</Text></View>
             </TouchableOpacity>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
