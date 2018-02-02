@@ -21,9 +21,6 @@ CSDN：[http://blog.csdn.net/u014041033?viewmode=contents](http://blog.csdn.net/
 ![buildbug.png](http://upload-images.jianshu.io/upload_images/3353755-9b998a898ab7e1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)<br>
 5：按照[codepush3之Android原生引用集成codepush](http://blog.csdn.net/u014041033/article/details/79004351)所示修改路径<br>
 或者如下修改<br>
-change codepush.gradle的35行node_modules路径<br>
-![codepushgradle.png](http://upload-images.jianshu.io/upload_images/3353755-556775a7c87ade9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 change react.gradle的14行reactRoot路径<br>
 ![reactbuild.png](http://upload-images.jianshu.io/upload_images/3353755-3ff148637def7335.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)<br>
 6：andorid studio 运行项目即可<br>
