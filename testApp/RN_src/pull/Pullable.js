@@ -104,8 +104,9 @@ export default class extends Component {
 
     BeginRefresh(){
         console.log('BeginRefresh');
-        this.state.pullPan.setValue({x: this.defaultXY.x, y: this.topIndicatorHeight});
         this.setFlag(flagPullrelease);
+        this.state.pullPan.setValue({x: this.defaultXY.x, y: this.topIndicatorHeight});
+
     }
 
     StopRefresh(){

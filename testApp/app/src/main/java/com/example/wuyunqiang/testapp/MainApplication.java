@@ -64,8 +64,11 @@ public class MainApplication extends Application implements ReactApplication {
             modules.add(new RNPackage());
             modules.add(new FastImageViewPackage());
             modules.add(new RNFetchBlobPackage());
-            modules.add(new CodePush("M9ezsCkj7OUhZcXONMg4accqVUu54ksvOXqog",
-                    getApplicationContext(), BuildConfig.DEBUG,"http://172.28.110.180:3000/"));
+            modules.add(new CodePush("cItSIwCesoQ5X23wCbzEe2xCM66J4ksvOXqog",
+                    getApplicationContext(), BuildConfig.DEBUG,"http://172.28.32.244:3000/"));
+
+//            modules.add(new CodePush("M9ezsCkj7OUhZcXONMg4accqVUu54ksvOXqog",
+//                    getApplicationContext(), BuildConfig.DEBUG,"http://172.28.110.180:3000/"));
             return modules;
         }
 

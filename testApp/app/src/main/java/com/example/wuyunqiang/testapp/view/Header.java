@@ -59,8 +59,8 @@ public class Header extends LinearLayout implements RefreshHeader {
         mProgressView = new ImageView(context);
         mProgressView.setImageDrawable(mProgressDrawable);
         mArrowView.parserPaths("M20,12l-1.41,-1.41L13,16.17V4h-2v12.17l-5.58,-5.59L4,12l8,8 8,-8z");
-        header.addView(mProgressView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
         header.addView(mArrowView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
+        header.addView(mProgressView, DensityUtil.dp2px(20), DensityUtil.dp2px(20));
         header.addView(new View(context), DensityUtil.dp2px(20), DensityUtil.dp2px(20));
         header.addView(mHeaderText, LinearLayout.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);

@@ -81,7 +81,6 @@ export default class App extends Component {
                 this.refresh = 3;
             },300)
         }
-
     };
 
 
@@ -96,6 +95,7 @@ export default class App extends Component {
     };
 
     ClickRefresh = ()=>{
+        console.log('执行了这里');
         this.pullList&&this.pullList.refresh();
         this.pullList&&this.pullList.BeginRefresh();
         this.clickRefresh = setTimeout(()=>{
@@ -106,7 +106,6 @@ export default class App extends Component {
     render() {
         return (
             <PullList
-                style={{height:HEIGHT}}
                 ref={(list)=> this.pullList = list}
                 onPullRelease={this.onPullRelease}
                 onEndReached={this.loadMore}
