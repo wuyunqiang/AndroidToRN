@@ -27,6 +27,7 @@ import Four from './list/FlatPage'
 import SGList from './list/SGList/SGListPage'
 import LargeListPage from './list/LargeListPage';
 import WaterFallPage from './page/WaterFallPage'
+import GesturePage from './page/GesturePage'
 const Routes = {
     One:{screen: One},
     Two:{screen: Two},
@@ -34,7 +35,8 @@ const Routes = {
     Four:{screen:Four},
     LargeListPage:{screen:LargeListPage},
     SGList:{screen:SGList},
-    WaterFallPage:{screen:WaterFallPage}
+    WaterFallPage:{screen:WaterFallPage},
+    GesturePage:{screen:GesturePage},
 };
 
 
@@ -72,11 +74,8 @@ const Index = TabNavigator(
         One:{screen: One},
         Two:{screen: Two},
         Three:{screen: Three},
-
-
     },
     {
-        lazy: true,
         swipeEnabled: true,
         tabBarComponent:props => <Tab {...props}/>,
         tabBarPosition: 'bottom',

@@ -31,6 +31,10 @@ class App extends Component {
                 style={{width:45/2,height:41/2}}
                 source={focused?AppImages.tab.home_active:AppImages.tab.home_unactive}/>
         ),
+        tabBarOnPress:(tab)=>{
+           console.log('one tab',tab)
+            tab.jumpToIndex(tab.scene.index)
+        },
         header:(<View style={{flexDirection:'row', alignItems:'center' ,height:SCALE(80), backgroundColor: Color.C5995f5, borderWidth:0, borderBottomWidth:0,}}>
             <TouchableOpacity activeOpacity={1} onPress={()=>{
                 NativeModules.NativeUtil.Finish();
@@ -47,7 +51,6 @@ class App extends Component {
 
     constructor(props){
         super(props);
-        console.log("One执行构造函数");
     }
 
     componentDidMount() {
@@ -144,8 +147,8 @@ class App extends Component {
         },3000);
     };
 
-    ClickRefresh = ()=>{
-        DeviceEventEmitter.emit('asdfasdfNative',{data:'hello'});
+    GesturePage = ()=>{
+        this.props.navigation.navigate('GesturePage');
     }
 
 
@@ -187,8 +190,8 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.goToSGList}>
                 <View style={styles.Item}><Text style={styles.hello}>使用SGList测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1} onPress={this.ClickRefresh}>
-                <View style={styles.Item}><Text style={styles.hello}>ClickRefresh</Text></View>
+            <TouchableOpacity activeOpacity={1} onPress={this.GesturePage}>
+                <View style={styles.Item}><Text style={styles.hello}>GesturePage</Text></View>
             </TouchableOpacity>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>

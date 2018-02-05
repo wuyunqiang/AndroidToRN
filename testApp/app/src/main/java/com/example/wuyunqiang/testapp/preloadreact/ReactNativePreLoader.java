@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.ViewGroup;
+
+import com.example.wuyunqiang.testapp.gesture.RNGestureHandlerEnabledRootView;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactRootView;
 
@@ -15,7 +17,7 @@ import java.util.Map;
  */
 public class ReactNativePreLoader {
 
-    private static final Map<String,ReactRootView> CACHE = new ArrayMap<>();
+    private static final Map<String,RNGestureHandlerEnabledRootView> CACHE = new ArrayMap<>();
 
     /**
      * 初始化ReactRootView，并添加到缓存
@@ -28,7 +30,7 @@ public class ReactNativePreLoader {
             return;
         }
         // 1.创建ReactRootView
-        ReactRootView rootView = new ReactRootView(activity);
+        RNGestureHandlerEnabledRootView rootView = new RNGestureHandlerEnabledRootView(activity);
         rootView.startReactApplication(
                 ((ReactApplication) activity.getApplication()).getReactNativeHost().getReactInstanceManager(),
                 componentName,

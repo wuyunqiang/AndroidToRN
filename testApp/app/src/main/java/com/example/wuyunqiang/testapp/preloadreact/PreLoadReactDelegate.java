@@ -9,6 +9,7 @@ import android.provider.Settings;
 import android.view.KeyEvent;
 
 import com.example.wuyunqiang.testapp.MainApplication;
+import com.example.wuyunqiang.testapp.gesture.RNGestureHandlerEnabledRootView;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -28,7 +29,7 @@ import javax.annotation.Nullable;
 public class PreLoadReactDelegate {
 
     private final Activity mActivity;
-    private ReactRootView mReactRootView;
+    private RNGestureHandlerEnabledRootView mReactRootView;
     private Callback mPermissionsCallback;
     private final String mMainComponentName;
     private PermissionListener mPermissionListener;
@@ -53,12 +54,13 @@ public class PreLoadReactDelegate {
 
         if (mMainComponentName != null && !needsOverlayPermission) {
             // 1.从缓存中获取RootView
-            mReactRootView = ReactNativePreLoader.getReactRootView(mMainComponentName);
+            mReactRootView = (RNGestureHandlerEnabledRootView)ReactNativePreLoader.getReactRootView(mMainComponentName);
 
             if(mReactRootView == null) {
 
                 // 2.缓存中不存在RootView,直接创建
-                mReactRootView = new ReactRootView(mActivity);
+                mReactRootView = new RNGestureHandlerEnabledRootView(mActivity);
+//                mReactRootView = new ReactRootView(mActivity);
                 mReactRootView.startReactApplication(
                         getReactInstanceManager(),
                         mMainComponentName,
@@ -120,7 +122,7 @@ public class PreLoadReactDelegate {
                         if (mReactRootView != null) {
                             throw new IllegalStateException("Cannot loadApp while app is already running.");
                         }
-                        mReactRootView = new ReactRootView(mActivity);
+                        mReactRootView = new RNGestureHandlerEnabledRootView(mActivity);
                         mReactRootView.startReactApplication(
                                 getReactInstanceManager(),
                                 mMainComponentName,

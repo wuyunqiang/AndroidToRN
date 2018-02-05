@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.example.wuyunqiang.testapp.MyReactActivity;
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
+
 import javax.annotation.Nullable;
 
 /**
@@ -24,6 +27,7 @@ public class PreLoadReactActivity extends ReactActivity implements DefaultHardwa
     }
 
     private PreLoadReactDelegate createPreLoadReactDelegate() {
+//        return new RNGestureHandlerEnabledRootView(MyReactActivity.this);
         return new PreLoadReactDelegate(this,getMainComponentName());
     }
 

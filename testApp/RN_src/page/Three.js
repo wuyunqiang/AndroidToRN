@@ -30,6 +30,10 @@ export default class App extends Component {
             <Image style={{width:42/2,height:43/2}}
                    source={focused?AppImages.tab.profile_active:AppImages.tab.profile_unactive}/>
         ),
+        tabBarOnPress:(tab)=>{
+            console.log('three tab',tab);
+            tab.jumpToIndex(tab.scene.index)
+        },
 
     })
 
@@ -41,6 +45,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
+        console.log("Three执行构造函数");
         this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
     }
 

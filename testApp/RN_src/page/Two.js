@@ -43,6 +43,10 @@ export default class App extends Component {
             <Image style={{width:38,height:40}}
                    source={focused?AppImages.tab.project_active:AppImages.tab.project_unactive}/>
         ),
+        tabBarOnPress:(tab)=>{
+            console.log('two tab',tab)
+            tab.jumpToIndex(tab.scene.index)
+        },
     });
 
     constructor(props){
@@ -50,6 +54,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
+        console.log("two执行构造函数");
         this.props.navigation.setParams({ClickRefresh:this.ClickRefresh})
         // this.subscription = DeviceEventEmitter.addListener('Two',this.update)
     }
