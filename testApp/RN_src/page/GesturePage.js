@@ -1,57 +1,23 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
-
+import { Animated,Dimensions,Alert,Text,StyleSheet, View } from 'react-native';
 import {
+    PanGestureHandler,
     LongPressGestureHandler,
     ScrollView,
     State,
     TapGestureHandler,
 } from 'react-native-gesture-handler';
-
+import TapOrPan from '../gesture/TapOrPan'
+import PressBox from '../gesture/PressBox'
 import { LoremIpsum } from '../data/common';
-
-export class PressBox extends Component {
-    _onHandlerStateChange = event => {
-        if (event.nativeEvent.state === State.ACTIVE) {
-            Alert.alert("I'm being pressed for so long");
-        }
-    };
-    _onSingleTap = event => {
-        if (event.nativeEvent.state === State.ACTIVE) {
-            Alert.alert("I'm touched");
-        }
-    };
-    _onDoubleTap = event => {
-        if (event.nativeEvent.state === State.ACTIVE) {
-            Alert.alert('D0able tap, good job!');
-        }
-    };
-    render() {
-        return (
-            <LongPressGestureHandler
-                onHandlerStateChange={this._onHandlerStateChange}
-                minDurationMs={800}>
-                <TapGestureHandler
-                    onHandlerStateChange={this._onSingleTap}
-                    waitFor="double_tap">
-                    <TapGestureHandler
-                        id="double_tap"
-                        onHandlerStateChange={this._onDoubleTap}
-                        numberOfTaps={2}>
-                        <View style={styles.box} />
-                    </TapGestureHandler>
-                </TapGestureHandler>
-            </LongPressGestureHandler>
-        );
-    }
-}
+import DraggableBox from '../gesture/draggable'
 
 export default class Example extends Component {
     render() {
         return (
             <ScrollView
-                waitFor={['image_pinch', 'image_rotation', 'image_tilt']}
-                style={styles.scrollView}>
+                id="scroll"
+                waitFor={['tap', 'pan']}>
                 <LoremIpsum words={40} />
                 <PressBox />
                 <LoremIpsum />

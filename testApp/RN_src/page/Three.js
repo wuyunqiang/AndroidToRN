@@ -34,6 +34,18 @@ export default class App extends Component {
             console.log('three tab',tab);
             tab.jumpToIndex(tab.scene.index)
         },
+        // header:(
+        //     <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
+        //         <TouchableOpacity activeOpacity={1} onPress={()=>{
+        //             navigation.goBack(null)
+        //         }}>
+        //             <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+        //                 <Image
+        //                     source={AppImages.Home.back}
+        //                     style={{width:SCALE(20),height:SCALE(37)}}/>
+        //             </View>
+        //         </TouchableOpacity>
+        //     </ImageBackground>)
 
     })
 
@@ -140,5 +152,14 @@ const styles = StyleSheet.create({
         margin:SCALE(10),
         justifyContent:'center',
         alignItems:'center'
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        height: SCALE(100),
+        paddingBottom:SCALE(20),
+        backgroundColor: Color.C5995f5,
+        borderWidth: 0,
+        borderBottomWidth: 0,
     }
 });

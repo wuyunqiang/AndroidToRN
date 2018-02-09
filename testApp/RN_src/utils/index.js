@@ -1,6 +1,7 @@
 import {Dimensions,PixelRatio,Platform} from 'react-native';
 import './StyleColor'
 import './HttpUtil'
+import './modalUtil'
 export const deviceWidth = Dimensions.get('window').width;      //设备的宽度
 export const deviceHeight = Dimensions.get('window').height;    //设备的高度
 let fontScale = PixelRatio.getFontScale();                      //返回字体大小缩放比例

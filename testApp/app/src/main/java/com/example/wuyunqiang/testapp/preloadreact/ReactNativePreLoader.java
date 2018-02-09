@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.example.wuyunqiang.testapp.gesture.RNGestureHandlerEnabledRootView;
 import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactRootView;
 
 import java.util.Map;
 
@@ -45,7 +44,7 @@ public class ReactNativePreLoader {
      * @param componentName
      * @return
      */
-    public static ReactRootView getReactRootView(String componentName) {
+    public static RNGestureHandlerEnabledRootView getReactRootView(String componentName) {
         return CACHE.get(componentName);
     }
 
@@ -55,7 +54,7 @@ public class ReactNativePreLoader {
      */
     public static void deatchView(String component) {
         try {
-            ReactRootView rootView = getReactRootView(component);
+            RNGestureHandlerEnabledRootView rootView = getReactRootView(component);
             ViewGroup parent = (ViewGroup) rootView.getParent();
             if (parent != null) {
                 parent.removeView(rootView);

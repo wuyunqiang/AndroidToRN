@@ -23,7 +23,8 @@ import { bindActionCreators } from 'redux';
 import * as homeCreators from '../actions/home';
 import PullView from '../pull/PullView'
 import CodePush from 'react-native-code-push';
-class App extends Component {
+import ModalUtil from "../utils/modalUtil";
+export default class App extends Component {
     static navigationOptions = ({navigation})=> ({
        tabBarLabel:'第一页',
         tabBarIcon: ({tintColor,focused}) => (
@@ -32,28 +33,34 @@ class App extends Component {
                 source={focused?AppImages.tab.home_active:AppImages.tab.home_unactive}/>
         ),
         tabBarOnPress:(tab)=>{
-           console.log('one tab',tab)
+           console.log('one tab',tab);
             tab.jumpToIndex(tab.scene.index)
         },
-        header:(<View style={{flexDirection:'row', alignItems:'center' ,height:SCALE(80), backgroundColor: Color.C5995f5, borderWidth:0, borderBottomWidth:0,}}>
-            <TouchableOpacity activeOpacity={1} onPress={()=>{
-                NativeModules.NativeUtil.Finish();
-            }}>
-                <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
-                    <Image
-                        source={AppImages.Home.back}
-                        style={{width:SCALE(20),height:SCALE(37)}}/>
-                </View>
-            </TouchableOpacity>
-        </View>)
+        // header:(
+        //     <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
+        //         <TouchableOpacity activeOpacity={1} onPress={()=>{
+        //             NativeModules.NativeUtil.Finish();
+        //         }}>
+        //             <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+        //                 <Image
+        //                     source={AppImages.Home.back}
+        //                     style={{width:SCALE(20),height:SCALE(37)}}/>
+        //             </View>
+        //         </TouchableOpacity>
+        //     </ImageBackground>)
 
 })
 
     constructor(props){
         super(props);
+        this.state = {
+            visible:false,
+            flag:false
+        }
     }
 
     componentDidMount() {
+        // NativeModules.NativeUtil.StatusBar();
         console.log('this.props',this.props);
         console.log("One componentDidMount ");
         this.NativeListener = DeviceEventEmitter.addListener('asdfasdfNative', (...data) =>{
@@ -79,23 +86,23 @@ class App extends Component {
         //     return false;
         // }
         // this.lastBackPressed = Date.now();
-        const nav = this.props.nav;//获取redux的navigation state
-        console.log('onBackAndroid nav', nav);
-        console.log('one 执行了这里');
-        const routes = nav.routes;
-        if (routes.length > 1) {
-            console.log('返回上一级');
-            this.props.navigation.goBack(null);
-            return true;
-        }else if(routes[0].routes[routes[0].index].routeName!=routes[0].routes[0].routeName){//当前页面不等于第一个页面 跳转至第一个页面
-            this.props.navigation.navigate(routes[0].routes[0].routeName);
-            console.log('跳转至首页');
-            return true;
-        }else{
-            console.log('结束activity');
-            NativeModules.NativeUtil.Finish();
-            return true;
-        }
+        // const nav = this.props.nav;//获取redux的navigation state
+        // console.log('onBackAndroid nav', nav);
+        // console.log('one 执行了这里');
+        // const routes = nav.routes;
+        // if (routes.length > 1) {
+        //     console.log('返回上一级');
+        //     this.props.navigation.goBack(null);
+        //     return true;
+        // }else if(routes[0].routes[routes[0].index].routeName!=routes[0].routes[0].routeName){//当前页面不等于第一个页面 跳转至第一个页面
+        //     this.props.navigation.navigate(routes[0].routes[0].routeName);
+        //     console.log('跳转至首页');
+        //     return true;
+        // }else{
+        //     console.log('结束activity');
+        //     NativeModules.NativeUtil.Finish();
+        //     return true;
+        // }
 
     };
 
@@ -151,8 +158,28 @@ class App extends Component {
         this.props.navigation.navigate('GesturePage');
     }
 
+    share = async()=>{
+        let data = await NativeModules.NativeUtil.showDialog();
+        if(data){
+            console.log('data',data)
+        }
+    }
 
+    showDialog = ()=>{
+        this.setState({
+            visible:true,
+        })
+    };
 
+    renderContent =()=>{
+        return (<View style={{width:WIDTH,height:300,backgroundColor:'red'}}/>)
+    };
+
+    close = ()=>{
+        this.setState({
+            visible:false,
+        })
+    }
 
     render() {
         return (<PullView
@@ -161,6 +188,11 @@ class App extends Component {
             overScrollMode = {'always'}
             style={{width: WIDTH, backgroundColor:Color.f5f5f5}}
             onPullRelease={this.onPullRelease}>
+            <ModalUtil
+                customerlayout = {{backgroundColor:'transparent'}}
+                close = {this.close}
+                visible = {this.state.visible}
+                contentView = {this.renderContent}/>
             <Text style={styles.hello}>使用ScrollView测试PullView </Text>
 
             <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:true,})}>
@@ -193,8 +225,9 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.GesturePage}>
                 <View style={styles.Item}><Text style={styles.hello}>GesturePage</Text></View>
             </TouchableOpacity>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+            <TouchableOpacity activeOpacity={1} onPress={this.share}>
+                <View style={styles.Item}><Text style={styles.hello}>show modal</Text></View>
+            </TouchableOpacity>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
@@ -210,22 +243,22 @@ class App extends Component {
 }
 
 
-const mapStateToProps = (state) => {
-    const { home,nav } = state;
-    return {
-        home,
-        nav
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    const homeActions = bindActionCreators(homeCreators, dispatch);
-    return {
-        homeActions
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// const mapStateToProps = (state) => {
+//     const { home,nav } = state;
+//     return {
+//         home,
+//         nav
+//     };
+// };
+//
+// const mapDispatchToProps = (dispatch) => {
+//     const homeActions = bindActionCreators(homeCreators, dispatch);
+//     return {
+//         homeActions
+//     };
+// };
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
     container: {
@@ -244,5 +277,14 @@ const styles = StyleSheet.create({
         margin:SCALE(10),
         justifyContent:'center',
         alignItems:'center'
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        height: SCALE(100),
+        paddingBottom:SCALE(20),
+        backgroundColor: Color.C5995f5,
+        borderWidth: 0,
+        borderBottomWidth: 0,
     }
 });

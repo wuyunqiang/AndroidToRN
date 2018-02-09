@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5995f5</color>
-    <color name="colorPrimaryDark">#5995f5</color>
+    <color name="colorPrimary">#FF4081</color>
+    <color name="colorPrimaryDark">#80000000</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="background">#E9967A</color>
+    <color name="backgroundwhite">#FCFCFC</color>
+    <color name="cancel_text">#80080808</color>
+    <color name="sperate">#F0F0F0</color>
+
+
 </resources>

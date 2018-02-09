@@ -21,6 +21,7 @@ const tab = {
 
 const Home = {
     get back() {return require('../assets/home/back.png')},
+    get backgroundImageHeader() {return require('../assets/home/backgroundImageHeader.png')},
 };
 
 

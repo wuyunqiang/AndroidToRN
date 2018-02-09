@@ -17,7 +17,6 @@ import {
     Image,
 } from 'react-native';
 import { StackNavigator,TabNavigator,NavigationActions } from 'react-navigation';
-import { enhance } from 'react-navigation-addons';
 import Tab from './component/Tab'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import One from './page/One'
@@ -81,7 +80,7 @@ const Index = TabNavigator(
         tabBarPosition: 'bottom',
         animationEnabled: true,
         tabBarOptions: tabbaroption,
-        headerLeft:null,
+
     });
 
 //实现定义某个页面的动画效果
@@ -100,30 +99,34 @@ const TransitionConfiguration = () => {
 const StackOptions = ({navigation}) => {
     const gesturesEnabled = true;
     const headerStyle= {
-        height:SCALE(80),
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        alignItems:'flex-end',//官方bug
+        height:60,
         backgroundColor: Color.C5995f5,
-        borderWidth:0,
-        borderBottomWidth:0,
+        borderWidth: 0,
+        borderBottomWidth: 0,
     };
     const headerTitleStyle = {
+        backgroundColor:'transparent',
         fontSize: FONT(17),
         color: 'white',
-        alignSelf: 'center'
     };
     const headerTintColor= 'white';
+
     const headerLeft = (
         <TouchableOpacity activeOpacity={1} onPress={()=>{
             console.log('配置里面的navigation goback');
             navigation.goBack(null)
         }}>
-            <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+            <View style={{paddingBottom:SCALE(20),paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
                 <Image
                     source={AppImages.Home.back}
                     style={{width:SCALE(20),height:SCALE(37)}}/>
             </View>
         </TouchableOpacity>
     );
-    const headerRight=(<View style={{paddingRight:SCALE(30)}}>
+    const headerRight=(<View style={{paddingRight:SCALE(30),width:SCALE(20),height:SCALE(37),backgroundColor:'red'}}>
     </View>);
     return {headerLeft,headerRight,headerStyle,gesturesEnabled,headerTitleStyle,headerTintColor,}
 };
