@@ -21,24 +21,24 @@ import PullList from '../pull/PullList'
 let rowData = ['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'];
 export default class App extends Component {
     static navigationOptions = ({navigation})=> ({
-        // header:(
-        //     <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
-        //         <TouchableOpacity activeOpacity={1} onPress={()=>{
-        //         navigation.goBack(null)
-        //     }}>
-        //         <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
-        //             <Image
-        //                 source={AppImages.Home.back}
-        //                 style={{width:SCALE(20),height:SCALE(37)}}/>
-        //         </View>
-        //     </TouchableOpacity>
-        //     <TouchableOpacity activeOpacity={0.5} onPress={navigation.state.params&&navigation.state.params.ClickRefresh}>
-        //         <Text style={{fontSize: FONT(17), color: 'white', alignSelf: 'center',marginRight:SCALE(40)}}>
-        //             刷新
-        //         </Text>
-        //
-        //     </TouchableOpacity>
-        // </ImageBackground>),
+        header:(
+            <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
+                <TouchableOpacity activeOpacity={1} onPress={()=>{
+                navigation.goBack(null)
+            }}>
+                <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+                    <Image
+                        source={AppImages.Home.back}
+                        style={{width:SCALE(20),height:SCALE(37)}}/>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.5} onPress={navigation.state.params&&navigation.state.params.ClickRefresh}>
+                <Text style={{fontSize: FONT(17), color: 'white', alignSelf: 'center',marginRight:SCALE(40)}}>
+                    刷新
+                </Text>
+        
+            </TouchableOpacity>
+        </ImageBackground>),
         tabBarLabel:'第二页',
         tabBarIcon: ({ tintColor,focused }) => (
             <Image style={{width:38,height:40}}
