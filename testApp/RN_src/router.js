@@ -101,7 +101,7 @@ const StackOptions = ({navigation}) => {
     const headerStyle= {
         flexDirection: 'row',
         justifyContent:'space-between',
-        alignItems:'flex-end',//官方bug
+        //alignItems:'flex-end',//官方bug
         height:60,
         backgroundColor: Color.C5995f5,
         borderWidth: 0,
