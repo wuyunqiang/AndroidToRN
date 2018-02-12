@@ -36,18 +36,18 @@ export default class App extends Component {
            console.log('one tab',tab);
             tab.jumpToIndex(tab.scene.index)
         },
-        // header:(
-        //     <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
-        //         <TouchableOpacity activeOpacity={1} onPress={()=>{
-        //             NativeModules.NativeUtil.Finish();
-        //         }}>
-        //             <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
-        //                 <Image
-        //                     source={AppImages.Home.back}
-        //                     style={{width:SCALE(20),height:SCALE(37)}}/>
-        //             </View>
-        //         </TouchableOpacity>
-        //     </ImageBackground>)
+        header:(
+            <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
+                <TouchableOpacity activeOpacity={1} onPress={()=>{
+                    NativeModules.NativeUtil.Finish();
+                }}>
+                    <View style={{paddingLeft:SCALE(30),paddingRight:SCALE(40)}}>
+                        <Image
+                            source={AppImages.Home.back}
+                            style={{width:SCALE(20),height:SCALE(37)}}/>
+                    </View>
+                </TouchableOpacity>
+            </ImageBackground>)
 
 })
 
