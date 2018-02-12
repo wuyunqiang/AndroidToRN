@@ -60,7 +60,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        // NativeModules.NativeUtil.StatusBar();
+        NativeModules.NativeUtil.StatusBar();
         console.log('this.props',this.props);
         console.log("One componentDidMount ");
         this.NativeListener = DeviceEventEmitter.addListener('asdfasdfNative', (...data) =>{
