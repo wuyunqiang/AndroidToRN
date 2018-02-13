@@ -1,14 +1,18 @@
 # AndroidToRN
-原生android中嵌入React Native<br>
-封装原生view,viewgroup,原生module<br>
-使用codepush热更新<br>
-下拉刷新+无限列表+大量图片<br>
+1:原生android中嵌入React Native<br>
+2:封装原生view,viewgroup,原生module<br>
+3:使用codepush热更新<br>
+4:下拉刷新+无限列表+大量图片<br>
+5:statusbar颜色+图片
 
 # 环境：
 Android studio3.0<br>
 react native 0.52<br>
 Mac 10.12.6 <br>
 # 如有问题或者需要我添加什么请提issue，我会去实现的 
+# plan 
+  1:dialog全屏显示 <br>
+
  
 CSDN：[http://blog.csdn.net/u014041033?viewmode=contents](http://blog.csdn.net/u014041033?viewmode=contents)<br>
 简书：[简书](http://www.jianshu.com/u/1386d6b454e5) <br>
