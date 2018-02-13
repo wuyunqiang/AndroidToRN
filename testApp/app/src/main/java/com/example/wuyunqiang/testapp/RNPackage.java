@@ -1,7 +1,7 @@
 package com.example.wuyunqiang.testapp;
 
-import com.example.wuyunqiang.testapp.modal.ReactModalHostManager;
 import com.example.wuyunqiang.testapp.rnmodules.NativeUtil;
+import com.example.wuyunqiang.testapp.rnview.PopModalManager;
 import com.example.wuyunqiang.testapp.rnview.PullLayout;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -28,8 +28,7 @@ public class RNPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> views = new ArrayList<>();
         views.add(new PullLayout());
-        views.add(new ReactModalHostManager());
-
+        views.add(new PopModalManager());
         return views;
     }
 }

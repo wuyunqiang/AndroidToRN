@@ -70,12 +70,12 @@
         android:layout_height="10dp"
         android:background="@color/sperate"/>
     <LinearLayout
+        android:id="@+id/cancel"
         android:background="@color/backgroundwhite"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center">
         <TextView
-            android:id="@+id/cancel"
             android:text="取消"
             android:textColor="@color/cancel_text"
             android:textSize="12sp"

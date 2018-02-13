@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 const ReactNative = require('ReactNative');
 import PropTypes from 'prop-types';
-var ModalView = requireNativeComponent('ModalView', App);
+var ModalAndroid = requireNativeComponent('ModalAndroid', App);//内部使用popwindow实现全屏
 export default class App extends Component {
     constructor(props){
         super(props);
@@ -27,19 +27,18 @@ export default class App extends Component {
 
     render() {
         return (
-            <ModalView {...this.props}>
+            <ModalAndroid
+                ref = {(PopModal)=>{this.PopModal = PopModal}}
+                {...this.props}>
                 <View style={{flex: 1}}>
                     {this.props.children}
                 </View>
-            </ModalView>
+            </ModalAndroid>
         )
     }
 }
 
-ModalView.propTypes = {
+ModalAndroid.propTypes = {
     ...View.propTypes,
-    animationType:PropTypes.string,
-    transparent:PropTypes.string,//必须 否则监听回调可能无法被调用
-    onRequestClose:PropTypes.func,//网络请求加载数据
-    onShow:PropTypes.func,
+    visible:PropTypes.bool,
 };

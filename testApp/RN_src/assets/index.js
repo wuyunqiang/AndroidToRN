@@ -22,6 +22,9 @@ const tab = {
 const Home = {
     get back() {return require('../assets/home/back.png')},
     get backgroundImageHeader() {return require('../assets/home/backgroundImageHeader.png')},
+    get share_icon_moments() {return require('../assets/home/share_icon_moments.png')},
+    get share_icon_wechat() {return require('../assets/home/share_icon_wechat.png')},
+
 };
 
 

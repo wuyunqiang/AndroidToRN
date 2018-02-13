@@ -1,31 +1,54 @@
 package com.example.wuyunqiang.testapp;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.example.wuyunqiang.testapp.activity.TestActivity;
-import com.example.wuyunqiang.testapp.preloadreact.ReactNativePreLoader;
 import com.example.wuyunqiang.testapp.utils.BarUtils;
 import com.example.wuyunqiang.testapp.utils.Utils;
 
 import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Dialog mDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        transparentStatusBar(this,Color.TRANSPARENT);
 
     }
+
+    private static void transparentStatusBar(final Activity activity,@ColorInt int color) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            window.getDecorView().setSystemUiVisibility(option);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
 
     public void onClick(View view) {
         if(view.getId()==R.id.toTest){
@@ -35,7 +58,25 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
         }else if(view.getId()==R.id.showPop){
             this.showPopWindow();
+        }else if(view.getId()==R.id.showDialog){
+
+            mDialog = new Dialog(this,R.style.AppTheme);
+            mDialog.setContentView(getContentView());
+            mDialog.show();
+            Utils.init(getApplication());
+            BarUtils.setStatusBarColor(this, Color.BLUE);
+            mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+            mDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }
+    }
+
+
+    private View getContentView() {
+        FrameLayout frameLayout = new FrameLayout(this);
+        frameLayout.setBackgroundColor(Color.BLUE);
+//        frameLayout.addView(mHostView);
+//        frameLayout.setFitsSystemWindows(true);
+        return frameLayout;
     }
 
 

@@ -7,9 +7,10 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-package com.example.wuyunqiang.testapp.modal;
+package com.example.wuyunqiang.testapp.view;
 
 import android.graphics.Point;
+
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.ReactShadowNodeImpl;
 
@@ -21,7 +22,7 @@ import com.facebook.react.uimanager.ReactShadowNodeImpl;
  * to be the window size.  This will then cause the children of the Modal to layout as if they can
  * fill the window.
  */
-class ModalHostShadowNode extends LayoutShadowNode {
+public class ModalHostShadowNode extends LayoutShadowNode {
 
   /**
    * We need to set the styleWidth and styleHeight of the one child (represented by the <View/>

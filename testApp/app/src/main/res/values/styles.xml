@@ -19,5 +19,11 @@
     <item name="android:windowNoTitle">true</item><!--无标题-->
     <item name="android:backgroundDimEnabled">true</item><!--模糊-->
     </style>
+    <style name="DialogFullStyle" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
 
 </resources>

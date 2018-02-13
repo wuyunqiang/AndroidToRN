@@ -29,4 +29,12 @@
         android:layout_height="wrap_content"
         android:text="showPop"/>
 
+
+    <Button
+        android:id="@+id/showDialog"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="showDialog"/>
+
 </LinearLayout>

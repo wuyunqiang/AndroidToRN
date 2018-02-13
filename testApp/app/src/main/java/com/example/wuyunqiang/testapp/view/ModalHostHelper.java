@@ -1,6 +1,6 @@
 // Copyright 2004-present Facebook. All Rights Reserved.
 
-package com.example.wuyunqiang.testapp.modal;
+package com.example.wuyunqiang.testapp.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;

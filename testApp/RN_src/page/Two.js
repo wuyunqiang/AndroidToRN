@@ -36,7 +36,7 @@ export default class App extends Component {
                 <Text style={{fontSize: FONT(17), color: 'white', alignSelf: 'center',marginRight:SCALE(40)}}>
                     刷新
                 </Text>
-        
+
             </TouchableOpacity>
         </ImageBackground>),
         tabBarLabel:'第二页',

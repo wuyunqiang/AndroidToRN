@@ -21,9 +21,9 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as homeCreators from '../actions/home';
+import ModalView from '../utils/ModalUtil'
 import PullView from '../pull/PullView'
 import CodePush from 'react-native-code-push';
-import ModalUtil from "../utils/modalUtil";
 export default class App extends Component {
     static navigationOptions = ({navigation})=> ({
        tabBarLabel:'第一页',
@@ -81,6 +81,12 @@ export default class App extends Component {
     }
 
     onBackAndroid = (params) => {
+        if(this.state.visible){
+            this.setState({
+                visible:false
+            })
+            return true;
+        }
         // 最近2秒内按过back键，可以退出应用。
         // if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
         //     return false;
@@ -156,30 +162,60 @@ export default class App extends Component {
 
     GesturePage = ()=>{
         this.props.navigation.navigate('GesturePage');
-    }
+    };
 
     share = async()=>{
         let data = await NativeModules.NativeUtil.showDialog();
         if(data){
             console.log('data',data)
         }
-    }
-
-    showDialog = ()=>{
-        this.setState({
-            visible:true,
-        })
     };
 
+    showPopDialog = ()=>{
+        this.PopModal&&this.PopModal.show();
+    };
+
+    onclick = ()=>{
+        alert("hello onclick red part");
+        this.close();
+    }
+
     renderContent =()=>{
-        return (<View style={{width:WIDTH,height:300,backgroundColor:'red'}}/>)
+        return (<TouchableOpacity
+                activeOpacity={1}
+                onPress={this.onclick}>
+            <View style={{width:WIDTH,height:100,flexDirection:'row', alignItems: 'center',justifyContent:'space-around',backgroundColor:'white'}}>
+                <View style={{justifyContent:'center', alignItems:'center'}}>
+                <Image
+                    source={AppImages.Home.share_icon_wechat}
+                    style={{width:40,height:40}}
+                    />
+                    <Text style={{margin:10,fontSize:16}}>微信好友</Text>
+                </View>
+                <View style={{justifyContent:'center', alignItems:'center'}}>
+                <Image
+                    source={AppImages.Home.share_icon_moments}
+                    style={{width:40,height:40}}
+                />
+                <Text style={{margin:10,fontSize:16}}>朋友圈</Text>
+                </View>
+            </View>
+            </TouchableOpacity>)
     };
 
     close = ()=>{
         this.setState({
-            visible:false,
+            visible:false
+        })
+      }
+
+    show = ()=>{
+        this.setState({
+            visible:true
         })
     }
+
+
 
     render() {
         return (<PullView
@@ -188,11 +224,6 @@ export default class App extends Component {
             overScrollMode = {'always'}
             style={{width: WIDTH, backgroundColor:Color.f5f5f5}}
             onPullRelease={this.onPullRelease}>
-            <ModalUtil
-                customerlayout = {{backgroundColor:'transparent'}}
-                close = {this.close}
-                visible = {this.state.visible}
-                contentView = {this.renderContent}/>
             <Text style={styles.hello}>使用ScrollView测试PullView </Text>
 
             <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:true,})}>
@@ -226,8 +257,13 @@ export default class App extends Component {
                 <View style={styles.Item}><Text style={styles.hello}>GesturePage</Text></View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={1} onPress={this.share}>
-                <View style={styles.Item}><Text style={styles.hello}>show modal</Text></View>
+                <View style={styles.Item}><Text style={styles.hello}>show原生xml写的界面</Text></View>
             </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={1} onPress={this.show}>
+                <View style={styles.Item}><Text style={styles.hello}>show popwindow封装的全屏modal</Text></View>
+            </TouchableOpacity>
+
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
@@ -235,9 +271,11 @@ export default class App extends Component {
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+            <ModalView
+                close = {this.close}
+                visible = {this.state.visible}
+                customerlayout = {{flex:1,justifyContent:'flex-end',}}
+                contentView = {this.renderContent}/>
         </PullView>)
     }
 }
@@ -271,7 +309,7 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     Item:{
-        backgroundColor:'gray',
+        backgroundColor:'#FF7F24',
         width:WIDTH,
         height:SCALE(100),
         margin:SCALE(10),

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DialogFullStyle" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+    </style>
+</resources>
