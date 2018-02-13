@@ -2,9 +2,10 @@
 1:原生android中嵌入React Native<br>
 2:封装原生view,viewgroup,原生module<br>
 3:使用codepush热更新<br>
-4:下拉刷新+无限列表+大量图片<br>
-5:statusbar颜色+图片<br>
-6:modal通过原生popwindow实现全屏,解决status覆盖问题<br>
+4:react navigation自定义tab实现凸起<br>
+5:下拉刷新+无限列表+大量图片<br>
+6:statusbar颜色+图片<br>
+7:modal通过原生popwindow实现全屏,解决status覆盖问题<br>
 
 # 环境：
 Android studio3.0<br>
