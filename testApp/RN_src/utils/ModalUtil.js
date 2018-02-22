@@ -37,6 +37,8 @@ export default class ModalView extends Component {
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
+    
+    
 
     _handleAppStateChange = (AppState)=>{
         console.log('AppState',AppState);
