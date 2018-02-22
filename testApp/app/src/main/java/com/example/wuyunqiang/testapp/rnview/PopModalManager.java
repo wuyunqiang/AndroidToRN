@@ -16,6 +16,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.uimanager.annotations.ReactPropGroup;
 import com.facebook.react.uimanager.events.EventDispatcher;
 
 import java.util.Map;
@@ -54,15 +55,19 @@ public class PopModalManager extends ViewGroupManager<PopModal> implements Activ
     }
 
     @ReactProp(name = "visible")
-    public void setVisible(PopModal view, boolean visible) {
-       if(visible){
-           if(!view.isShow()){
-               view.showOrUpdate();
-           }
+    public void setVisible(PopModal view, ReadableArray array) {
+        boolean visible = array.getBoolean(0);
+        boolean update = array.getBoolean(1);//目的是强制更新
+        if(visible){
+           view.showOrUpdate();
+//           if(!view.isShow()){
+//               view.showOrUpdate();
+//           }
        }else{
-           if(view.isShow()){
-               view.dismiss();
-           }
+           view.dismiss();
+//           if(view.isShow()){
+//               view.dismiss();
+//           }
        }
     }
 

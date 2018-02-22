@@ -16,7 +16,7 @@ import {
     TouchableOpacity,
     NativeModules,
     ImageBackground,
-    DeviceEventEmitter
+    DeviceEventEmitter,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

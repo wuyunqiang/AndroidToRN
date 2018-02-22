@@ -18,8 +18,9 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import com.example.wuyunqiang.testapp.Utils.Utils;
+
 import com.example.wuyunqiang.testapp.Utils.BarUtils;
+import com.example.wuyunqiang.testapp.Utils.Utils;
 import com.example.wuyunqiang.testapp.activity.TestActivity;
 import com.example.wuyunqiang.testapp.preloadreact.ReactNativePreLoader;
 

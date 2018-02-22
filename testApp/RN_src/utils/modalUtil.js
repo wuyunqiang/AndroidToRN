@@ -14,17 +14,37 @@ import {
     TextInput,
     NativeModules,
     InteractionManager,
+    AppState
 } from 'react-native';
 import ModalAndroid from '../component/modol'
 
 export default class ModalView extends Component {
     constructor(props) {
         super(props);
-        this.state = { visible: this.props.visible };
+        this.state = {
+            update:false,
+            visible: this.props.visible };
     }
+
+    componentDidMount() {
+        AppState.addEventListener('change', this._handleAppStateChange);
+    }
+
     componentWillReceiveProps(props) {
         this.setState({ visible: props.visible });
     }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    _handleAppStateChange = (AppState)=>{
+        console.log('AppState',AppState);
+        console.log('AppState _handleAppStateChange',this.state.visible);
+        this.setState({
+            update:!this.state.update,
+            visible: this.state.visible });
+    };
 
     close = ()=>{
         requestAnimationFrame(() => {
@@ -65,7 +85,7 @@ export default class ModalView extends Component {
             <ModalAndroid
                 style={{width:0,height:0}}//避免显示空白
                 ref = {(modalAndroid)=>{this.modalAndroid = modalAndroid}}
-                visible = {this.state.visible}>
+                visible = {[this.state.visible,this.state.update]}>
                 <TouchableOpacity
                     activeOpacity={1}
                     onPress={this.close}>
