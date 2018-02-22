@@ -1,4 +1,4 @@
-package com.example.wuyunqiang.testapp.utils;
+package com.example.wuyunqiang.testapp.Utils;
 
 /**
  * Created by wuyunqiang on 2018/2/7.

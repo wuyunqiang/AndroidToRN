@@ -17,10 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.example.wuyunqiang.testapp.R;
+import com.example.wuyunqiang.testapp.Utils.BarUtils;
+import com.example.wuyunqiang.testapp.Utils.Utils;
 import com.example.wuyunqiang.testapp.activity.OtherActivity;
 import com.example.wuyunqiang.testapp.activity.TestActivity;
-import com.example.wuyunqiang.testapp.utils.BarUtils;
-import com.example.wuyunqiang.testapp.utils.Utils;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;

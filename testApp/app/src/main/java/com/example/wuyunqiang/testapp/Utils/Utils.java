@@ -1,4 +1,4 @@
-package com.example.wuyunqiang.testapp.utils;
+package com.example.wuyunqiang.testapp.Utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
