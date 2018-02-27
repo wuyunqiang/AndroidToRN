@@ -6,6 +6,7 @@
 5:下拉刷新+无限列表+大量图片<br>
 6:statusbar颜色+图片<br>
 7:modal通过原生popwindow实现全屏,解决status覆盖问题<br>
+8:集成redux<br>
 
 # 环境：
 Android studio3.0<br>
