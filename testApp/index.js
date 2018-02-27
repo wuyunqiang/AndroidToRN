@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import './RN_src/utils'
 import './RN_src/assets'
-import Root from './RN_src/router'
+import Root from './RN_src/root'
 import Test from './RN_src/page/TestActivity'
 AppRegistry.registerComponent('RNActivity', () => Root);
 

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.example.wuyunqiang.testapp.preloadreact.ReactNativePreLoader;
 import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
+
+    static final String TAG ="MainActivity";
 
     private Dialog mDialog;
 
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         }else if(view.getId()==R.id.showPop){
             this.showPopWindow();
         }else if(view.getId()==R.id.showDialog){
-
             mDialog = new Dialog(this,R.style.AppTheme);
             mDialog.setContentView(getContentView());
             mDialog.show();

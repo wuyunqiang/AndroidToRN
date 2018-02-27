@@ -22,16 +22,20 @@ import {
     requireNativeComponent,
     ActivityIndicator
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Card from './SGList/Card';
 import DataSource from './SGList/CardListDataSource';
 import PullLayout from '../pull/PullLayout'
-export default class App extends Component {
+import * as homeCreators from "../actions/home";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+class App extends Component {
 
     static navigationOptions = ({navigation})=> ({
         title:'FlatList'
     });
 
-    constructor(props){
+    constructor(props,context){
         super(props);
         this.state = {
             deals: [],
@@ -79,14 +83,23 @@ export default class App extends Component {
     };
 
     componentDidMount() {
+        console.log('replace flatPage componentDidMount',this.props);
         BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
         this.getData('loadMore');
         this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
     }
 
+
+    replace = ()=>{
+        this.props.navigation.navigate('SGList');
+
+    }
+
     renderRowView = ({item, index, separators})=>{
         return (
+            <TouchableOpacity opacity={0.5} onPress={this.replace}>
             <Card deal={item} />
+            </TouchableOpacity>
         );
     };
 
@@ -171,6 +184,17 @@ export default class App extends Component {
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    console.log('replace flatpage state',state);
+    const {nav } = state;
+    return {
+        nav
+    };
+};
+
+export default connect(mapStateToProps)(App);
 
 
 const styles = StyleSheet.create({

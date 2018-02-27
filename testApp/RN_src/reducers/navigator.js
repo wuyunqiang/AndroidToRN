@@ -3,14 +3,13 @@
  */
 import {fromJS} from 'immutable';
 import {NavigationActions} from 'react-navigation';
-import includes from 'lodash/includes';
 
 import AppNavigator from '../router';
 
 // *****************方式重复跳转页面
 const navigateOnce = (getStateForAction) => (action, state) => {
-    console.log('执行了这里跳转页面')
     const {type, routeName} = action
+    console.log('执行了这里跳转页面',"routeName:",routeName);
     return (
         state &&
         type === NavigationActions.NAVIGATE &&

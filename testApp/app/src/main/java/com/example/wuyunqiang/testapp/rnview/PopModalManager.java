@@ -3,7 +3,6 @@ package com.example.wuyunqiang.testapp.rnview;
 import android.app.Activity;
 import android.util.Log;
 import android.view.ViewGroup;
-
 import com.example.wuyunqiang.testapp.view.ModalHostShadowNode;
 import com.example.wuyunqiang.testapp.view.PopModal;
 import com.example.wuyunqiang.testapp.view.SmartRefreshLayout;
@@ -18,9 +17,7 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.annotations.ReactPropGroup;
 import com.facebook.react.uimanager.events.EventDispatcher;
-
 import java.util.Map;
-
 import javax.annotation.Nullable;
 
 /**

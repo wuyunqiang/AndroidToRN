@@ -12,6 +12,7 @@ import {
     Text,
     View,
     Image,
+    PermissionsAndroid,
     BackHandler,
     TouchableOpacity,
     NativeModules,
@@ -24,7 +25,7 @@ import * as homeCreators from '../actions/home';
 import ModalView from '../utils/ModalUtil'
 import PullView from '../pull/PullView'
 import CodePush from 'react-native-code-push';
-export default class App extends Component {
+class App extends Component {
     static navigationOptions = ({navigation})=> ({
        tabBarLabel:'第一页',
         tabBarIcon: ({tintColor,focused}) => (
@@ -72,6 +73,8 @@ export default class App extends Component {
         }
     }
 
+
+
     componentWillUnmount() {
         this.NativeListener.remove();
         this.timer&&clearTimeout(this.timer);
@@ -88,28 +91,27 @@ export default class App extends Component {
             return true;
         }
         // 最近2秒内按过back键，可以退出应用。
-        // if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
-        //     return false;
-        // }
-        // this.lastBackPressed = Date.now();
-        // const nav = this.props.nav;//获取redux的navigation state
-        // console.log('onBackAndroid nav', nav);
-        // console.log('one 执行了这里');
-        // const routes = nav.routes;
-        // if (routes.length > 1) {
-        //     console.log('返回上一级');
-        //     this.props.navigation.goBack(null);
-        //     return true;
-        // }else if(routes[0].routes[routes[0].index].routeName!=routes[0].routes[0].routeName){//当前页面不等于第一个页面 跳转至第一个页面
-        //     this.props.navigation.navigate(routes[0].routes[0].routeName);
-        //     console.log('跳转至首页');
-        //     return true;
-        // }else{
-        //     console.log('结束activity');
-        //     NativeModules.NativeUtil.Finish();
-        //     return true;
-        // }
-
+        if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+            return false;
+        }
+        this.lastBackPressed = Date.now();
+        const nav = this.props.nav;//获取redux的navigation state
+        console.log('onBackAndroid nav', nav);
+        console.log('one 执行了这里');
+        const routes = nav.routes;
+        if (routes.length > 1) {
+            console.log('返回上一级');
+            this.props.navigation.goBack(null);
+            return true;
+        }else if(routes[0].routes[routes[0].index].routeName!=routes[0].routes[0].routeName){//当前页面不等于第一个页面 跳转至第一个页面
+            this.props.navigation.navigate(routes[0].routes[0].routeName);
+            console.log('跳转至首页');
+            return true;
+        }else{
+            console.log('结束activity');
+            NativeModules.NativeUtil.Finish();
+            return true;
+        }
     };
 
 
@@ -139,7 +141,7 @@ export default class App extends Component {
     };
 
     goToFlatListPull = ()=>{
-        this.props.navigation.navigate('Four');
+        this.props.navigation.navigate('Four',{...this.props});
     }
 
     goToLargePull = ()=>{
@@ -215,9 +217,13 @@ export default class App extends Component {
         })
     }
 
+    test = ()=>{
+    }
+
 
 
     render() {
+        console.log('tab','渲染了第一个页面');
         return (<PullView
             ref = {(pull)=>this.pullview = pull}
             showsVerticalScrollIndicator={false}
@@ -263,8 +269,9 @@ export default class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.show}>
                 <View style={styles.Item}><Text style={styles.hello}>show popwindow封装的全屏modal</Text></View>
             </TouchableOpacity>
-
+            <TouchableOpacity activeOpacity={1} onPress={this.test}>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
+            </TouchableOpacity>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
@@ -281,22 +288,22 @@ export default class App extends Component {
 }
 
 
-// const mapStateToProps = (state) => {
-//     const { home,nav } = state;
-//     return {
-//         home,
-//         nav
-//     };
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//     const homeActions = bindActionCreators(homeCreators, dispatch);
-//     return {
-//         homeActions
-//     };
-// };
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
+const mapStateToProps = (state) => {
+    const { home,nav } = state;
+    return {
+        home,
+        nav
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    const homeActions = bindActionCreators(homeCreators, dispatch);
+    return {
+        homeActions
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
     container: {

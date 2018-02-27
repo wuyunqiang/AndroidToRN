@@ -28,9 +28,6 @@ import LargeListPage from './list/LargeListPage';
 import WaterFallPage from './page/WaterFallPage'
 import GesturePage from './page/GesturePage'
 const Routes = {
-    One:{screen: One},
-    Two:{screen: Two},
-    Three:{screen: Three},
     Four:{screen:Four},
     LargeListPage:{screen:LargeListPage},
     SGList:{screen:SGList},
@@ -64,7 +61,6 @@ const tabbaroption = {
         height:Platform.OS==='ios'?SCALE(90):SCALE(100),
         alignItems:'center',
         justifyContent:'center',
-
     }
 };
 
@@ -75,12 +71,12 @@ const Index = TabNavigator(
         Three:{screen: Three},
     },
     {
+        lazy:false,
         swipeEnabled: true,
         tabBarComponent:props => <Tab {...props}/>,
         tabBarPosition: 'bottom',
         animationEnabled: true,
         tabBarOptions: tabbaroption,
-
     });
 
 //实现定义某个页面的动画效果
@@ -101,7 +97,7 @@ const StackOptions = ({navigation}) => {
     const headerStyle= {
         flexDirection: 'row',
         justifyContent:'space-between',
-        alignItems:'flex-end',//官方bug
+//        alignItems:'flex-end',//官方bug
         height:60,
         backgroundColor: Color.C5995f5,
         borderWidth: 0,

@@ -19,6 +19,7 @@ import {
     DeviceEventEmitter,
     requireNativeComponent
 } from 'react-native';
+import PropTypes from 'prop-types';
 import DataSource from './CardListDataSource';
 import PullLayout from '../../pull/PullLayout'
 import CardListView from './CardListView';
@@ -26,7 +27,11 @@ export default class SGListPage extends Component {
 
     static navigationOptions = ({navigation})=> ({
        title:'SGListView'
-    })
+    });
+
+    static contextTypes = {
+        store: PropTypes.object,
+    };
 
     constructor(props){
         super(props);
@@ -50,6 +55,7 @@ export default class SGListPage extends Component {
 
     componentDidMount() {
         this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
+        console.log('replace SGListPage replace',this.context.store.getState());
     }
 
     componentWillUnmount() {
@@ -69,6 +75,7 @@ export default class SGListPage extends Component {
             }
         });
     };
+
 
     renderRow(rowData, sectionID, rowID) {
         return (

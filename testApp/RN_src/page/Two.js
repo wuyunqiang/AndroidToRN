@@ -15,11 +15,15 @@ import {
     TouchableOpacity,
     NativeModules,
     ImageBackground,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    ScrollView
 } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as homeCreators from '../actions/home';
 import PullList from '../pull/PullList'
 let rowData = ['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'];
-export default class App extends Component {
+class App extends Component {
     static navigationOptions = ({navigation})=> ({
         header:(
             <ImageBackground style={styles.header} source={AppImages.Home.backgroundImageHeader} resizeMode='cover'>
@@ -110,6 +114,7 @@ export default class App extends Component {
     };
 
     render() {
+        console.log('tab',"这里渲染第二个页面")
         return (
             <PullList
                 ref={(list)=> this.pullList = list}
@@ -123,6 +128,23 @@ export default class App extends Component {
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    const { nav } = state;
+    return {
+        nav
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    const homeActions = bindActionCreators(homeCreators, dispatch);
+    return {
+        homeActions
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
     container: {

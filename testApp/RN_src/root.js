@@ -9,13 +9,14 @@ import {
     BackHandler,
     Platform
 } from 'react-native';
+import { addListener } from './utils/NavigationReduxUtil';
+import PropTypes from 'prop-types';
 import { Provider,connect } from 'react-redux';
-import { StackNavigator,TabNavigator,addNavigationHelpers,NavigationActions,DeviceEventEmitter} from 'react-navigation';
+import { StackNavigator,TabNavigator,addNavigationHelpers,NavigationActions} from 'react-navigation';
 import configureStore from './store/configure-store';//配置reduce
 import rootSaga from './sagas/index';//配置sagas异步操作
 import AppNavigator from './router'
 const store = configureStore();
-GLOBAL.Log = console.log;
 store.runSaga(rootSaga);//配置数据通过saga获取 然后通过reduce返回存储到store中 store作为唯一数据源
 
 // const getCurrentRouteName = (navigationState) => {
@@ -31,11 +32,19 @@ store.runSaga(rootSaga);//配置数据通过saga获取 然后通过reduce返回�
 // }
 
 class NavigatorView extends React.Component {
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired,
+        nav: PropTypes.object.isRequired,
+    };
 
     render (){
+        const { dispatch, nav } = this.props;
         //react-navigation与redux集成
-        return (<AppNavigator navigation={addNavigationHelpers({dispatch: this.props.dispatch, state: this.props.nav})}
-                            />)
+        return (<AppNavigator navigation={addNavigationHelpers({
+            dispatch,
+            state: nav,
+            addListener,
+        })}/>)
     }
 }
 /**

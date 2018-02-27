@@ -20,9 +20,12 @@ import {
     requireNativeComponent
 } from 'react-native';
 import PullLayout from '../pull/PullLayout'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as homeCreators from '../actions/home';
 
 let rowData = ['1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8','1','2','3','4','5','6','7','8'];
-export default class App extends Component {
+class App extends Component {
 
     static navigationOptions = ({navigation})=> ({
         tabBarLabel:'第三页',
@@ -87,6 +90,7 @@ export default class App extends Component {
 
 
     render() {
+        console.log('tab',"这里渲染第333333个页面")
         return (
             <PullLayout
                 Key = {this.KEY}
@@ -131,6 +135,23 @@ export default class App extends Component {
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    const { nav } = state;
+    return {
+        nav
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    const homeActions = bindActionCreators(homeCreators, dispatch);
+    return {
+        homeActions
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
     container: {
