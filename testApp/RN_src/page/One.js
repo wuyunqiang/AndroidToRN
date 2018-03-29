@@ -60,6 +60,9 @@ class App extends Component {
         }
     }
 
+    componentWillMount() {
+
+    }
     componentDidMount() {
         NativeModules.NativeUtil.StatusBar();
         console.log('this.props',this.props);
@@ -71,6 +74,19 @@ class App extends Component {
         if(Platform.OS==='android'){
             BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
         }
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+
+    }
+
+    componentDidUpdate() {
+
     }
 
 
@@ -82,6 +98,8 @@ class App extends Component {
             BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
         }
     }
+
+
 
     onBackAndroid = (params) => {
         if(this.state.visible){
@@ -218,6 +236,7 @@ class App extends Component {
     }
 
     test = ()=>{
+        this.props.navigation.navigate("Test");
     }
 
 
@@ -286,6 +305,9 @@ class App extends Component {
         </PullView>)
     }
 }
+
+
+
 
 
 const mapStateToProps = (state) => {

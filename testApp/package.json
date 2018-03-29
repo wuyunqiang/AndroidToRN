@@ -22,7 +22,7 @@
     "react-native-largelist": "^1.2.4",
     "react-native-root-toast": "^3.0.0",
     "react-native-sglistview": "^0.4.5",
-    "react-navigation": "^1.1.2",
+    "react-navigation": "^1.5.8",
     "react-navigation-redux-helpers": "^1.0.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",

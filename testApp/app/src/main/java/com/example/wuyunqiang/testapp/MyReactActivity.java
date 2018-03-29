@@ -13,4 +13,6 @@ public class MyReactActivity extends PreLoadReactActivity {
     protected String getMainComponentName() {
         return "RNActivity";
     }
+
+
 }

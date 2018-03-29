@@ -27,12 +27,14 @@ import SGList from './list/SGList/SGListPage'
 import LargeListPage from './list/LargeListPage';
 import WaterFallPage from './page/WaterFallPage'
 import GesturePage from './page/GesturePage'
+import Test from "./page/Test";
 const Routes = {
     Four:{screen:Four},
     LargeListPage:{screen:LargeListPage},
     SGList:{screen:SGList},
     WaterFallPage:{screen:WaterFallPage},
     GesturePage:{screen:GesturePage},
+    Test:{screen:Test},
 };
 
 

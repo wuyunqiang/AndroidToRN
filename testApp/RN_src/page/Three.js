@@ -59,6 +59,7 @@ class App extends Component {
         this.KEY = "Three"
     }
 
+
     componentDidMount() {
         console.log("Three执行构造函数");
         this.subscription = DeviceEventEmitter.addListener(this.KEY+"onRefreshReleased",this.refreshReleased);
