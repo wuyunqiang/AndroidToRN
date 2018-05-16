@@ -43,12 +43,13 @@ android {
 }
 
 dependencies {
+
     compile group: 'com.github.bumptech.glide', name: 'glide', version: '3.8.0'
     compile group: 'com.github.bumptech.glide', name: 'okhttp3-integration', version: '1.5.0'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
-    compile "com.facebook.react:react-native:+" // From node_modules.
+     compile ("com.facebook.react:react-native:0.53.0") { force = true } // From node_modules.
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:26.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
