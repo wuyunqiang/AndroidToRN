@@ -27,7 +27,7 @@ export default class App extends Component {
 
     //数据获取后回调 刷新结束
     finishRefresh = (key)=>{
-        console.log("结束下拉"+key);
+        Log("结束下拉"+key);
         UIManager.dispatchViewManagerCommand(ReactNative.findNodeHandle(this),
             UIManager.PullLayout.Commands.FinishRefresh,[key])
     };

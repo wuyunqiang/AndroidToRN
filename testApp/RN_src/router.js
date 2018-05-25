@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import { StackNavigator,TabNavigator,NavigationActions } from 'react-navigation';
 import Tab from './component/Tab'
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
+import CardStackStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator';
 import One from './page/One'
 import Two from './page/Two'
 import Three from './page/Three'
@@ -27,14 +27,18 @@ import SGList from './list/SGList/SGListPage'
 import LargeListPage from './list/LargeListPage';
 import WaterFallPage from './page/WaterFallPage'
 import GesturePage from './page/GesturePage'
-import Test from "./page/Test";
+import Pull from "./page/Pull";
+import PullScrollView from './page/PullScrollView'
+import PullFlatList from './page/PullFlatList'
 const Routes = {
     Four:{screen:Four},
     LargeListPage:{screen:LargeListPage},
     SGList:{screen:SGList},
     WaterFallPage:{screen:WaterFallPage},
     GesturePage:{screen:GesturePage},
-    Test:{screen:Test},
+    Pull:{screen:Pull},
+    PullScrollView:{screen:PullScrollView},
+    PullFlatList:{screen:PullFlatList},
 };
 
 

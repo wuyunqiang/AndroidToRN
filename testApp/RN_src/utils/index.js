@@ -31,6 +31,17 @@ export function scaleSize(size: number) {
     return size / defaultPixel;
 }
 
+export function Log(...params){
+    if(__DEV__){
+        // debug模式
+        console.log(...params)
+    }else{
+        // release模式
+        // Log('release模式');
+    }
+
+}
+
 global.FONT = setSpText;
 
 global.SCALE = scaleSize;
@@ -38,5 +49,7 @@ global.SCALE = scaleSize;
 global.WIDTH = deviceWidth;
 
 global.HEIGHT = deviceHeight;
+
+global.Log = Log;
 
 

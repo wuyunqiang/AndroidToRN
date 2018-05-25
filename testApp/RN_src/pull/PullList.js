@@ -30,16 +30,20 @@ export default class PullList extends Pullable {
 
     constructor(props) {
         super(props);
+        this.state = {
+            ...this.BaseState,
+            data:[],
+        };
         this.currentState = LoadingState;
-        this.page = 1;
+        this.page = 0;
         this.type='List';
     }
 
     componentDidMount() {
         this.mounted = true;
-        this.setPage(1);
         InteractionManager.runAfterInteractions(()=>{
-            this.props.onPullRelease(this.resolveHandler);
+            this.loadMore()
+            // this.props.onPullRelease(this.resolveHandler);
         })
     }
 
@@ -56,6 +60,9 @@ export default class PullList extends Pullable {
     };
 
     renderSeparatorView = ()=>{
+        if(this.props.ItemSeparatorComponent){
+            return this.props.ItemSeparatorComponent();
+        }
         return (<View style={{width:WIDTH,height:SCALE(20),backgroundColor:Color.f5f5f5}}/>)
     };
 
@@ -63,7 +70,7 @@ export default class PullList extends Pullable {
      * 刷新
      */
     refresh = () => {
-        console.log('zhixngzheli');
+        Log('zhixngzheli');
         if (this.mounted) {
             this.setPage(1);
             this.props.onPullRelease&&this.props.onPullRelease(this.resolveHandler);
@@ -87,7 +94,7 @@ export default class PullList extends Pullable {
      */
     setData = (_data)=>{
         this.setPage(1);
-        console.log('setData');
+        Log('下拉刷新设置数据 setData');
         if (_data.length == 0){
             this.currentState = EmptyState;
         }else{
@@ -96,6 +103,7 @@ export default class PullList extends Pullable {
         this.setState({
             data: _data,
         })
+
     };
 
     /**
@@ -130,8 +138,9 @@ export default class PullList extends Pullable {
     resumeMoreDataFromError = ()=>{
         this.currentState = MoreState;
         this.page++;
-        console.log('this.page',this.page)
         this.props.onEndReached&&this.props.onEndReached(this.getPage());
+
+        Log('this.page',this.page)
     };
 
     /**
@@ -154,12 +163,12 @@ export default class PullList extends Pullable {
      * 加载 空页面
      */
     _renderEmpty = ()=>{
-        console.log('没有数据');
+        Log('没有数据');
         return (
             <View style={[styles.contain,{justifyContent:'center'}]}>
                 <TouchableOpacity onPress={this.reloadData}>
                     <View style={{justifyContent:'center', alignItems:'center'}}>
-                    <Image style={{width:SCALE(323),height:SCALE(267)}} source={AppImages.List.nodata}/>
+                    <Image style={{width:SCALE(365),height:SCALE(238)}} source={AppImages.Common.nodata}/>
                     <Text style={{fontSize:FONT(15),color:Color.C666666}}>暂无数据</Text>
                     </View>
                 </TouchableOpacity>
@@ -190,6 +199,7 @@ export default class PullList extends Pullable {
         }
         this.page++;
         this.props.onEndReached&&this.props.onEndReached(this.getPage())
+
     };
 
     /**
@@ -205,15 +215,14 @@ export default class PullList extends Pullable {
                       onScroll={this.onScroll}
                       scrollEnabled={this.state.scrollEnabled}
                       refreshing={false}
-                      keyExtractor={(item, index) => {return index}}
-                      onEndReachedThreshold={1}
+                      keyExtractor={(item, index) => {return index.toString()}}
+                      onEndReachedThreshold={0.5}
                       data={this.state.data}
                       ListFooterComponent={this._renderFoot}
                       windowSize={10}
                       updateCellsBatchingPeriod={1}
                       maxToRenderPerBatch={10}
                       disableVirtualization={false}
-
                       {...this.props}
                 ItemSeparatorComponent={this.renderSeparatorView}
                 onEndReached = {this.loadMore}/>
@@ -222,6 +231,7 @@ export default class PullList extends Pullable {
 
     renderNoMore = ()=>{
         return (<View style={{height:SCALE(120),justifyContent:'center', alignItems:'center'}}>
+            <Text>没有更多数据</Text>
         </View>)
     };
 
@@ -254,11 +264,11 @@ export default class PullList extends Pullable {
      */
     _renderFoot = ()=>{
         if (this.currentState === NoMoreState){
-            return this.props.renderNoMore || this.renderNoMore();
+            return this.props.renderNoMore?this.props.renderNoMore():this.renderNoMore();
         }else if(this.currentState === NoMoreErrorState){
-            return this.props.renderMoreError || this.renderMoreError();
+            return this.props.renderMoreError?this.props.renderMoreError():this.renderMoreError();
         }else if(this.currentState >= ListState){
-            return this.props.renderMore || this.renderMore();
+            return this.props.renderMore?this.props.renderMore():this.renderMore();
         }else{
             return null;
         }
@@ -270,7 +280,7 @@ export default class PullList extends Pullable {
      */
     getScrollable = ()=> {
         if (this.currentState === LoadingState){
-            return this.props.renderLoading || this._renderLoading();
+            return this.props.renderLoading?this.props.renderLoading():this._renderLoading();
         }else if(this.currentState === EmptyState){
             if(this.props.renderEmpty){
                return this.props.renderEmpty(this.reloadData)

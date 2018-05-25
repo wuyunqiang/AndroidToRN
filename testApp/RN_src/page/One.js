@@ -81,10 +81,6 @@ class App extends Component {
 
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-
-    }
-
     componentDidUpdate() {
 
     }
@@ -235,8 +231,8 @@ class App extends Component {
         })
     }
 
-    test = ()=>{
-        this.props.navigation.navigate("Test");
+    pull = ()=>{
+        this.props.navigation.navigate("Pull");
     }
 
 
@@ -250,6 +246,10 @@ class App extends Component {
             style={{width: WIDTH, backgroundColor:Color.f5f5f5}}
             onPullRelease={this.onPullRelease}>
             <Text style={styles.hello}>使用ScrollView测试PullView </Text>
+
+            <TouchableOpacity activeOpacity={1} onPress={this.pull}>
+                <View style={styles.Item}><Text style={styles.hello}>下拉刷新统一接口</Text></View>
+            </TouchableOpacity>
 
             <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:true,})}>
                 <View style={styles.Item}><Text style={styles.hello}>使用Flatlist测试pullList有数据</Text></View>
@@ -278,9 +278,9 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.goToSGList}>
                 <View style={styles.Item}><Text style={styles.hello}>使用SGList测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1} onPress={this.GesturePage}>
-                <View style={styles.Item}><Text style={styles.hello}>GesturePage</Text></View>
-            </TouchableOpacity>
+            {/*<TouchableOpacity activeOpacity={1} onPress={this.GesturePage}>*/}
+                {/*<View style={styles.Item}><Text style={styles.hello}>GesturePage</Text></View>*/}
+            {/*</TouchableOpacity>*/}
             <TouchableOpacity activeOpacity={1} onPress={this.share}>
                 <View style={styles.Item}><Text style={styles.hello}>show原生xml写的界面</Text></View>
             </TouchableOpacity>
@@ -288,9 +288,7 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.show}>
                 <View style={styles.Item}><Text style={styles.hello}>show popwindow封装的全屏modal</Text></View>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1} onPress={this.test}>
-            <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
-            </TouchableOpacity>
+
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>
             <View style={styles.Item}><Text style={styles.hello}>test</Text></View>

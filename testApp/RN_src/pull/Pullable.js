@@ -44,7 +44,7 @@ export default class extends Component {
         this.defaultXY = {x: 0, y: this.topIndicatorHeight * -1};
         this.pullOkMargin = this.props.pullOkMargin ? this.props.pullOkMargin : pullOkMargin;
         this.duration = this.props.duration ? this.props.duration : defaultDuration;
-        this.state = Object.assign({}, props, {
+        this.BaseState = Object.assign({}, props, {
             arrowAngle: new Animated.Value(0),
             pullPan: new Animated.ValueXY(this.defaultXY),
             scrollEnabled: this.defaultScrollEnabled,
@@ -74,7 +74,7 @@ export default class extends Component {
             onPanResponderTerminate: this.onPanResponderRelease.bind(this),
         });
         this.IOS = (Platform.OS==='ios'?true:false);
-        this.setFlag(defaultFlag);
+        this.flag = defaultFlag;
         this.storyTimeKey = "story_time_key";
         this.base64Icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAABQBAMAAAD8TNiNAAAAJ1BMVEUAAACqqqplZWVnZ2doaGhqampoaGhpaWlnZ2dmZmZlZWVmZmZnZ2duD78kAAAADHRSTlMAA6CYqZOlnI+Kg/B86E+1AAAAhklEQVQ4y+2LvQ3CQAxGLSHEBSg8AAX0jECTnhFosgcjZKr8StE3VHz5EkeRMkF0rzk/P58k9rgOW78j+TE99OoeKpEbCvcPVDJ0OvsJ9bQs6Jxs26h5HCrlr9w8vi8zHphfmI0fcvO/ZXJG8wDzcvDFO2Y/AJj9ADE7gXmlxFMIyVpJ7DECzC9J2EC2ECAAAAAASUVORK5CYII=';
     }
@@ -103,14 +103,14 @@ export default class extends Component {
     }
 
     BeginRefresh(){
-        console.log('BeginRefresh');
+        Log('BeginRefresh');
         this.setFlag(flagPullrelease);
         this.state.pullPan.setValue({x: this.defaultXY.x, y: this.topIndicatorHeight});
 
     }
 
     StopRefresh(){
-        console.log('StopRefresh');
+        Log('StopRefresh');
         this.resetDefaultXYHandler();
     }
 
@@ -169,11 +169,11 @@ export default class extends Component {
 
     onScroll(e) {
         if (e.nativeEvent.contentOffset.y <= 0) {
-            // console.log('onScroll e.nativeEvent.contentOffset.y',e.nativeEvent.contentOffset.y);
+            // Log('onScroll e.nativeEvent.contentOffset.y',e.nativeEvent.contentOffset.y);
             // this.scrollEnabled = this.defaultScrollEnabled;
             this.state.scrollEnabled===this.defaultScrollEnabled?"":this.setState({scrollEnabled: this.defaultScrollEnabled});
         } else if(!this.isPullState()) {
-            // console.log('onScroll e.nativeEvent.contentOffset.y',e.nativeEvent.contentOffset.y);
+            // Log('onScroll e.nativeEvent.contentOffset.y',e.nativeEvent.contentOffset.y);
             // this.scrollEnabled = true;
             this.state.scrollEnabled?"":this.setState({scrollEnabled: true});
         }
@@ -186,7 +186,7 @@ export default class extends Component {
     setFlag(flag) {
         if (this.flag != flag) {
             this.flag = flag;
-            console.log('设置inderTop',this.flag);
+            Log('设置inderTop',this.flag);
             this.renderTopIndicator();
         }
     }
@@ -221,7 +221,7 @@ export default class extends Component {
     }
 
     render() {
-        let refreshControl = this.props.refreshControl;
+       // let refreshControl = this.props.refreshControl;
         return (
             <View style={[styles.wrap, this.props.style]} onLayout={this.onLayout}>
                 <Animated.View ref={(c) => {this.ani = c;}}
@@ -230,7 +230,7 @@ export default class extends Component {
                     <View ref={(c) => {this.scrollContainer = c;}}
                           {...this.panResponder.panHandlers}
                           style={{width: this.state.width, height: this.state.height}}>
-                        {this.getScrollable(refreshControl)}
+                        {this.getScrollable()}
                     </View>
                 </Animated.View>
             </View>
@@ -332,7 +332,7 @@ export default class extends Component {
     }
 
     defaultTopIndicatorRender(pulling, pullok, pullrelease, gesturePosition) {
-        console.log('pulling, pullok, pullrelease',pulling, pullok, pullrelease);
+        Log('pulling, pullok, pullrelease',pulling, pullok, pullrelease);
         if (pulling) {
             Animated.timing(this.state.arrowAngle, {
                 toValue: 0,

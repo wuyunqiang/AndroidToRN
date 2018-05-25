@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.example.wuyunqiang.testapp.Utils.Utils;
@@ -304,6 +305,11 @@ public class PopModal extends ViewGroup implements LifecycleEventListener {
         public void onChildStartedNativeGesture(MotionEvent androidEvent) {
             Log.i(TAG,"onChildStartedNativeGesture");
             mJSTouchDispatcher.onChildStartedNativeGesture(androidEvent, getEventDispatcher());
+        }
+
+        @Override
+        public void handleException(Throwable t) {
+
         }
 
         @Override

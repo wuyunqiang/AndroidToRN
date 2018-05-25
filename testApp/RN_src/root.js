@@ -12,7 +12,7 @@ import {
 import { addListener } from './utils/NavigationReduxUtil';
 import PropTypes from 'prop-types';
 import { Provider,connect } from 'react-redux';
-import { StackNavigator,TabNavigator,addNavigationHelpers,NavigationActions} from 'react-navigation';
+import { StackNavigator,TabNavigator,NavigationActions} from 'react-navigation';
 import configureStore from './store/configure-store';//配置reduce
 import rootSaga from './sagas/index';//配置sagas异步操作
 import AppNavigator from './router'
@@ -40,11 +40,11 @@ class NavigatorView extends React.Component {
     render (){
         const { dispatch, nav } = this.props;
         //react-navigation与redux集成
-        return (<AppNavigator navigation={addNavigationHelpers({
+        return (<AppNavigator navigation={{
             dispatch,
             state: nav,
             addListener,
-        })}/>)
+        }}/>)
     }
 }
 /**
