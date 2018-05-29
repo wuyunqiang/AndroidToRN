@@ -10,7 +10,7 @@
 
 # 环境：
 Android studio3.0<br>
-react native 0.52<br>
+react native 0.55.4<br>
 Mac 10.12.6 <br>
 # 如有问题或者需要我添加什么请提issue，我会去实现的 
  
