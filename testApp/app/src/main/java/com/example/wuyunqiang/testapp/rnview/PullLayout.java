@@ -157,7 +157,7 @@ public class PullLayout extends ViewGroupManager<SmartRefreshLayout> {
 
     @ReactProp(name = "HeaderText")
     public void HeaderText(final SmartRefreshLayout refreshLayout,final String HeaderText) {
-        this.header.getmHeaderText().setText(HeaderText);
+//        this.header.getmHeaderText().setText(HeaderText);
     }
 
     /**

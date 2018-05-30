@@ -16,7 +16,7 @@
     "react": "^16.2.0",
     "react-native": "0.55.4",
     "react-native-code-push": "^5.3.4",
-    "react-native-fast-image": "^2.0.1",
+    "react-native-fast-image": "^4.0.14",
     "react-native-fetch-blob": "^0.10.8",
     "react-native-gesture-handler": "^1.0.0-alpha.40",
     "react-native-largelist": "^1.2.4",

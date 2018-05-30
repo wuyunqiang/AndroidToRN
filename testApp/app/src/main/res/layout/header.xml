@@ -5,8 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:gravity="center"
-    android:background="#FFFFFF"
+    android:layout_gravity="center"
+    android:background="#f9f9f9"
     android:layout_width="match_parent"
     android:layout_height="50dp">
-
+    <FrameLayout
+        android:backgroundTint="#fe461c"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/pulling"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <ImageView
+            android:id="@+id/pullok"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+        <ImageView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/pullrelease"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+    </FrameLayout>
 </LinearLayout>

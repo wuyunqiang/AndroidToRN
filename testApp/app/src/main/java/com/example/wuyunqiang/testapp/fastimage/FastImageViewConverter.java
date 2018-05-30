@@ -1,5 +1,5 @@
 package com.example.wuyunqiang.testapp.fastimage;
-
+import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
 import com.bumptech.glide.Priority;
@@ -54,8 +54,8 @@ class FastImageViewConverter {
         return priority;
     }
 
-    private static Map<String, ScaleType> REACT_RESIZE_MODE_MAP =
-            new HashMap<String, ScaleType>() {{
+    private static Map<String, ImageView.ScaleType> REACT_RESIZE_MODE_MAP =
+            new HashMap<String, ImageView.ScaleType>() {{
                 put("contain", ScaleType.FIT_CENTER);
                 put("cover", ScaleType.CENTER_CROP);
                 put("stretch", ScaleType.FIT_XY);
@@ -63,8 +63,8 @@ class FastImageViewConverter {
             }};
 
     public static ScaleType scaleType(String resizeMode) {
-        if (resizeMode == null) resizeMode = "contain";
-        final ScaleType scaleType = REACT_RESIZE_MODE_MAP.get(resizeMode);
+        if (resizeMode == null) resizeMode = "cover";
+        final ImageView.ScaleType scaleType = REACT_RESIZE_MODE_MAP.get(resizeMode);
         return scaleType;
     }
 }

@@ -12,6 +12,7 @@ import {
     Text,
     View,
     Image,
+    TextInput,
     PermissionsAndroid,
     BackHandler,
     TouchableOpacity,
@@ -192,7 +193,7 @@ class App extends Component {
     };
 
     onclick = ()=>{
-        alert("hello onclick red part");
+        // alert("hello onclick red part");
         this.close();
     }
 
@@ -200,7 +201,14 @@ class App extends Component {
         return (<TouchableOpacity
                 activeOpacity={1}
                 onPress={this.onclick}>
-            <View style={{width:WIDTH,height:100,flexDirection:'row', alignItems: 'center',justifyContent:'space-around',backgroundColor:'white'}}>
+            <View style={{
+                width:WIDTH,
+                height:100,
+                flexDirection:'row',
+                alignItems: 'center',
+                justifyContent:'space-around',
+                backgroundColor:'white'
+            }}>
                 <View style={{justifyContent:'center', alignItems:'center'}}>
                 <Image
                     source={AppImages.Home.share_icon_wechat}
@@ -251,26 +259,6 @@ class App extends Component {
                 <View style={styles.Item}><Text style={styles.hello}>下拉刷新统一接口</Text></View>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:true,})}>
-                <View style={styles.Item}><Text style={styles.hello}>使用Flatlist测试pullList有数据</Text></View>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={()=>this.goToOther({data:false})}>
-                <View style={styles.Item}><Text style={styles.hello}>使用Flatlist测试pullList没有数据</Text></View>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={this.hotupdate}>
-                <View style={styles.Item}><Text style={styles.hello}>测试codepush</Text></View>
-                </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={this.goToNativePull}>
-                <View style={styles.Item}><Text style={styles.hello}>使用ScrollView测试原生封装的下拉刷新</Text></View>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={1} onPress={this.goToFlatListPull}>
-                <View style={styles.Item}><Text style={styles.hello}>使用flatlist测试原生封装的下拉刷新</Text></View>
-            </TouchableOpacity>
-
             <TouchableOpacity activeOpacity={1} onPress={this.goToLargePull}>
                 <View style={styles.Item}><Text style={styles.hello}>使用largelist测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
@@ -278,6 +266,10 @@ class App extends Component {
             <TouchableOpacity activeOpacity={1} onPress={this.goToSGList}>
                 <View style={styles.Item}><Text style={styles.hello}>使用SGList测试原生封装的下拉刷新</Text></View>
             </TouchableOpacity>
+
+                   <TouchableOpacity activeOpacity={1} onPress={this.hotupdate}>
+                            <View style={styles.Item}><Text style={styles.hello}>测试codepush</Text></View>
+                            </TouchableOpacity>
             {/*<TouchableOpacity activeOpacity={1} onPress={this.GesturePage}>*/}
                 {/*<View style={styles.Item}><Text style={styles.hello}>GesturePage</Text></View>*/}
             {/*</TouchableOpacity>*/}

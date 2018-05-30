@@ -1,5 +1,4 @@
 package com.example.wuyunqiang.testapp.fastimage;
-
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;

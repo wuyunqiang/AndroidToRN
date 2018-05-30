@@ -6,7 +6,7 @@ export default class Card extends React.Component {
     return (
       <View style={styles.container}>
         <Text>{this.props.deal.title}</Text>
-        <FastImage
+        <Image
             source={{
               uri: this.props.deal.largeImageUrl,
                 priority: FastImage.priority.normal,}}

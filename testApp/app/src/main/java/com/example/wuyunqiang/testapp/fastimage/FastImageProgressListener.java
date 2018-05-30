@@ -1,6 +1,5 @@
 package com.example.wuyunqiang.testapp.fastimage;
-
-public interface ProgressListener {
+public interface FastImageProgressListener {
 
     void onProgress(String key, long bytesRead, long expectedLength);
 
