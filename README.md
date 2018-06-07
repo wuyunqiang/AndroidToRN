@@ -32,7 +32,7 @@ change react.gradle的14行reactRoot路径<br>
 # ChangeLog:<br>
 1.0.6<br>
 ![modalAndroid.gif](http://upload-images.jianshu.io/upload_images/3353755-99d956849f6f4663.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![C01A4DA3-E51A-4B14-9E78-2504EFE5A168.png](https://upload-images.jianshu.io/upload_images/3353755-9287b7a536282ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/800)
+![image.png](https://upload-images.jianshu.io/upload_images/3353755-cdb0a664d7d5be47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 1.0.5<br>
 原生下拉刷新+大列表(Flatlist||SGListView)+大量图片 不会卡顿<br>
